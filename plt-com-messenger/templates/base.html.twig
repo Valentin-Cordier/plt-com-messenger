@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Bonjour!{% endblock %}</title>
+        {% block stylesheets %}
+
+        {% endblock %}
+        <link rel="stylesheet" href="styles/bootstrap.min.css">
+        <link rel="stylesheet" href="styles/header.css">
+    </head>
+    <body>
+        {% block body %}
+    
+        {% endblock %}
+        <div class="main">
+                    <nav id="nav">
+                        <div class="img"><img src="#" style="width:110px; height:70px; margin-top: 0.2em;"></div>
+                            <div class="toggle">
+                                <i class="fas fa-bars menu"></i>
+                            </div>
+                    <!--Icone de connexion et de déconnexion-->
+                            <ul class="ul">
+                                <li class="li"><a href="index">Accueil</a></li>
+                                <li class="li"><a href="contact">Contact</a></li>
+                                <li class="li"><a href="musique">Musique</a></li>
+                                <li class="li"><a href="groupe">Groupe</a></li>
+                                <li class="li"><a href="profil" class="dropbtn">Profil</a></li>
+                                <li class="li"><a href="#"><i class="fas fa-sign-in-alt"></i></a></li>
+                            <!--<li><a><i class="fas fa-sign-out-alt"></i></a></li>-->
+                
+                             </ul>       
+                    </nav>
+                </div>
+        
+    </body>
+</html>
