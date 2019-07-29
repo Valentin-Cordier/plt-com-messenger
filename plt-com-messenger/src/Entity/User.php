@@ -5,94 +5,121 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * User
- *
- * @ORM\Table(name="user")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_user", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
-    private $idUser;
+    private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=250, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $username;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="nom", type="string", length=250, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $nom = 'NULL';
+    private $prenom;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="prenom", type="string", length=250, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $prenom = 'NULL';
+    private $nom;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=250, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=250, nullable=false)
+     * @ORM\Column(type="date", nullable=true)
      */
-    private $password;
-
-    public $confirm_password;
+    private $date_de_naissance;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="date_de_naissance", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $dateDeNaissance = 'NULL';
+    private $telephone;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="telephone", type="string", length=250, nullable=true, options={"default"="NULL"})
-     */
-    private $telephone = 'NULL';
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Conv", mappedBy="idUser")
-     */
-    private $idConv;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Groupe", mappedBy="idUser")
-     */
-    private $idGroupe;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
+    public function getId(): ?int
     {
-        $this->idConv = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->idGroupe = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->id;
     }
 
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(?string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(?string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getDateDeNaissance(): ?\DateTimeInterface
+    {
+        return $this->date_de_naissance;
+    }
+
+    public function setDateDeNaissance(?\DateTimeInterface $date_de_naissance): self
+    {
+        $this->date_de_naissance = $date_de_naissance;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
 }
