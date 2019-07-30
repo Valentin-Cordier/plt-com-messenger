@@ -1,18 +1,18 @@
-{% block title %}Hello GestionCompteController!{% endblock %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Connexion !</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! âœ…</h1>
+    <form action="{{ path('index') }}" method="post">
+        <div class="form-group">
+            <input placeholder="Adresse email ..." required name="_username" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <input placeholder="Mot de passe ..." required name="_password" type="password" class="form-control">
+        </div>
+        <div class="form-group">
+           <button type="submit" class="btn btn-success">Connexion !</button>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/Formation-Simplon/github/plt-com-messenger/plt-com-messenger/src/Controller/GestionCompteController.php'|file_link(0) }}">src/Controller/GestionCompteController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/Formation-Simplon/github/plt-com-messenger/plt-com-messenger/templates/gestion_compte/index.html.twig'|file_link(0) }}">templates/gestion_compte/index.html.twig</a></code></li>
-    </ul>
-</div>
+        </div>
+    </form>
 {% endblock %}

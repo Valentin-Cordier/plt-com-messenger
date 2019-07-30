@@ -46,6 +46,13 @@ class User
      */
     private $telephone;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
+
+    public $confirm_password;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +68,10 @@ class User
         $this->username = $username;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->username;
     }
 
     public function getPrenom(): ?string
@@ -119,6 +130,18 @@ class User
     public function setTelephone(?string $telephone): self
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }
