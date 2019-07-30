@@ -3,13 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Bonjour!{% endblock %}</title>
-        <link rel="stylesheet" href="styles/bootstrap.min.css"
+        <link rel="stylesheet" href="styles/bootstrap.min.css">
         {% block stylesheets %}
         {% endblock %}
     </head>
     <body>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <a class="navbar-brand" href="#">Navbar</a>
+                    <a class="navbar-brand" href="{{ path('index') }}">Navbar</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                     </button>
@@ -30,15 +30,17 @@
                             <a class="nav-link" href="{{ path('groupe') }}">Groupe</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('deconnexion') }}">Déconnexion</a>
+                                <a class="nav-link" href="{{ path('deconnexion') }}">Déconnexion</a>
                         </li>
                     {% else %}
+                        {% if not app.user %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('connexion') }}">Connexion</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('inscription') }}">Inscription</a>
+                                <a class="nav-link" href="{{ path('inscription') }}">Créer un compte</a>
                             </li>
+                        {% endif %}
                     {% endif %}
                       </ul>
                       <form class="form-inline my-2 my-lg-0">

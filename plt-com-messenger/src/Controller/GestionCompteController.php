@@ -15,17 +15,18 @@ class GestionCompteController extends AbstractController
     /**
      * @Route("/inscription", name="inscription")
      */
-    public function inscription( Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
+    public function inscription( Request $request, ObjectManager $manager,UserPasswordEncoderInterface $encoder){
         $user = new User();
 
         $form = $this->createForm(RegistrationType::class, $user);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if($form->isSubmitted() && $form->isValid()){
             $hash = $encoder->encodePassword($user, $user->getPassword());
 
             $user->setPassword($hash);
+
 
             $manager->persist($user);
             $manager->flush();
@@ -33,7 +34,11 @@ class GestionCompteController extends AbstractController
             $this->addFlash('success', 'Tu es bien enregistré !');
 
             return $this->redirectToRoute('connexion');
+
         }
+
+        
+
 
         return $this->render('gestion_compte/inscription.html.twig', [
             'form' => $form->createView(),
@@ -51,6 +56,11 @@ class GestionCompteController extends AbstractController
         ]);
     }
 
+            /**
+       * @Route("/deconnexion", name="deconnexion")
+       */
+      public function logout() {}
+
     /**
      * @Route("/gestion", name="gestion")
      */
@@ -58,12 +68,4 @@ class GestionCompteController extends AbstractController
     {
         return $this->render('gestion_compte/gestion.html.twig');
     }
-
-          /**
-       * @Route("/deconnexion", name="deconnexion")
-       */
-      public function logout() 
-      {
-        return $this->render('plt_com_messenger/index.html.twig');
-      }
 }

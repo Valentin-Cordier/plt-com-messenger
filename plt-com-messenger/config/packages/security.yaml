@@ -1,12 +1,12 @@
 security:
     encoders:
         App\Entity\User:
-                algorithm: bcrypt
+            algorithm: bcrypt
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
-        in_database:
+        in_database: 
             entity:
                 class: App\Entity\User
                 property: email
@@ -19,14 +19,13 @@ security:
 
             provider: in_database
 
-            form_login:
+            form_login: 
                 login_path: connexion
                 check_path: connexion
 
             logout:
-                path: déconnexion
+                path: deconnexion
                 target: index
-
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
