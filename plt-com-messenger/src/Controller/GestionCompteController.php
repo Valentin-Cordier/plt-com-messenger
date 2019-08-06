@@ -59,7 +59,10 @@ class GestionCompteController extends AbstractController
             /**
        * @Route("/deconnexion", name="deconnexion")
        */
-      public function logout() {}
+      public function logout() 
+      {
+        return $this->redirectToRoute('base');
+      }
 
     /**
      * @Route("/gestion", name="gestion")

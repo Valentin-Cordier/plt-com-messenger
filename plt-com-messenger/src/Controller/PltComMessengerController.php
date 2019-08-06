@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PltComMessengerController extends AbstractController
 {
     /**
-     * @Route("/", name="base")
+     * @Route("/", name="index")
      */
     public function base()
     {
@@ -18,12 +18,12 @@ class PltComMessengerController extends AbstractController
     }
 
     /**
-     * @Route("/index", name="index")
+     * @Route("/inde", name="inde")
      */
     public function index()
     {
         return $this->render('plt_com_messenger/index.html.twig', [
-            'controller_name' => 'PltComMessengerController',
+            
         ]);
     }
 
