@@ -35,7 +35,7 @@
                     {% else %}
                         {% if not app.user %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('connexion') }}">Connexion</a>
+                                <a class="nav-link" href="{{ path('login') }}">Connexion</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('inscription') }}">Créer un compte</a>
@@ -51,7 +51,7 @@
                     <div class="container-fluid-width=100%">
                         <div class="row">
                              <div class="col-sm-2"></div>
-                            <div class="col-sm-4"><a href="{{ path('connexion') }}"><button type="button" class="btn btn-primary btn-lg btn-block">Se connecter</button></a></div>
+                            <div class="col-sm-4"><a href="{{ path('login') }}"><button type="button" class="btn btn-primary btn-lg btn-block">Se connecter</button></a></div>
                             <div class="col-sm-4"><a href="{{ path('inscription') }}"><button type="button" class="btn btn-primary btn-lg btn-block">Se créer un compte</button></a></div>
                             <div class="col-sm-2"></div>
 

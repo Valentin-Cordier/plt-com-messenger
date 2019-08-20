@@ -2,60 +2,53 @@
 
 namespace App\Entity;
 
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * User
+ *
+ * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(
  * fields={"email"},
  * message="L'email que vous avez indiqué est déjà utilisé !"
  * )
  */
-class User implements UserInterface
+class User implements UserInterface \Serializable
 {
     /**
-     * @ORM\Id()
+     * @var int
+     *
+     * @ORM\Column(name="id_user", type="integer", nullable=false)
+     * @ORM\Id
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
      */
-    private $id;
+    private $idUser;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=50, nullable=false)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $prenom;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $nom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=50, nullable=false)
+     * @Assert\NotBlank()
      * @Assert\Email()
      */
     private $email;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
-     */
-    private $date_de_naissance;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $telephone;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=50, nullable=false)
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire 8 caractères")
      */
     private $password;
@@ -65,9 +58,25 @@ class User implements UserInterface
      */
     public $confirm_password;
 
-    public function getId(): ?int
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Groupe", mappedBy="idUser")
+     */
+    private $idGroupe;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
     {
-        return $this->id;
+        $this->idGroupe = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function getIdUser(): ?int
+    {
+        return $this->idUser;
     }
 
     public function getUsername(): ?string
@@ -122,30 +131,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getDateDeNaissance(): ?\DateTimeInterface
-    {
-        return $this->date_de_naissance;
-    }
-
-    public function setDateDeNaissance(?\DateTimeInterface $date_de_naissance): self
-    {
-        $this->date_de_naissance = $date_de_naissance;
-
-        return $this;
-    }
-
-    public function getTelephone(): ?string
-    {
-        return $this->telephone;
-    }
-
-    public function setTelephone(?string $telephone): self
-    {
-        $this->telephone = $telephone;
-
-        return $this;
-    }
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -162,8 +147,33 @@ class User implements UserInterface
 
     public function getSalt() {}
 
-    public function getRoles() 
+    public function getRoles() {
+        if (empty($this->roles)) {
+            return ['ROLE_USER'];
+        }
+        return $this->roles;
+    }
+
+    function addRole($role) {
+        $this->roles[] = $role;
+    }
+
+    public function serialize()
     {
-        return ['ROLE_USER'];
+        return serialize([
+            $this->idUser,
+            $this->username,
+            $this->email,
+            $this->password
+        ]);
+    }
+    public function unserialize($string)
+    {
+        list(
+            $this->idUser,
+            $this->username,
+            $this->email,
+            $this->password
+        ) unserialize(string, ('allowed_class' => false));
     }
 }

@@ -6,8 +6,12 @@ use App\Entity\User;
 use App\Form\RegistrationType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class GestionCompteController extends AbstractController
@@ -31,9 +35,9 @@ class GestionCompteController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            $this->addFlash('success', 'Tu es bien enregistré !');
+            $this->addFlash('success', 'Tu es bien enregistrÃ© !');
 
-            return $this->redirectToRoute('connexion');
+            return $this->redirectToRoute('login');
 
         }
 
@@ -45,24 +49,44 @@ class GestionCompteController extends AbstractController
         ]);
 
     }
-
     /**
      * @Route("/connexion", name="connexion")
      */
-    public function connexion()
+    public function connexion(Request $request, AuthenticationUtils $utils)
     {
-        return $this->render('gestion_compte/connexion.html.twig',[
-            'controller_name' => 'PltComMessengerController',
+        $error = $utils->getLastAuthenticationError();
+
+        $lastUsername = $utils->getLastUsername();
+
+
+        return $this->render('gestion_compte/connexion.html.twig', [
+            'error'         => $error,
+            'last_username' => $lastUsername
         ]);
+    }
+
+    /**
+     * @Route("/login", name="login")
+     */
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+        // if ($this->getUser()) {
+        //    $this->redirectToRoute('target_path');
+        // }
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('gestion_compte/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->redirectToRoute('index');
     }
 
             /**
        * @Route("/deconnexion", name="deconnexion")
        */
-      public function logout() 
-      {
-        return $this->redirectToRoute('base');
-      }
+      public function logout(){}
 
     /**
      * @Route("/gestion", name="gestion")
