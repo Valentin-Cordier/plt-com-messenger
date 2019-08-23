@@ -31,14 +31,14 @@ class Amis
     /**
      * @var string|null
      *
-     * @ORM\Column(name="email", type="string", length=50, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="email", type="string", length=250, nullable=true, options={"default"="NULL"})
      */
     private $email = 'NULL';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=50, nullable=false)
+     * @ORM\Column(name="password", type="string", length=250, nullable=false)
      */
     private $password;
 
@@ -53,6 +53,59 @@ class Amis
      * })
      */
     private $idUser;
+
+    public function getIdAmis(): ?int
+    {
+        return $this->idAmis;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
 
 
 }

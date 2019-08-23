@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Form\RegistrationFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Security\LoginAuthenticator;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class GestionCompteController extends AbstractController
 {
@@ -35,9 +38,9 @@ class GestionCompteController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            $this->addFlash('success', 'Tu es bien enregistrÃ© !');
 
-            return $this->redirectToRoute('login');
+
+            return $this->redirectToRoute('connexion');
 
         }
 
@@ -49,44 +52,21 @@ class GestionCompteController extends AbstractController
         ]);
 
     }
+    
     /**
      * @Route("/connexion", name="connexion")
      */
-    public function connexion(Request $request, AuthenticationUtils $utils)
+    public function connexion()
     {
-        $error = $utils->getLastAuthenticationError();
-
-        $lastUsername = $utils->getLastUsername();
-
-
-        return $this->render('gestion_compte/connexion.html.twig', [
-            'error'         => $error,
-            'last_username' => $lastUsername
-        ]);
+        if (app.user) {
+            return $this->redirectToRoute('accueil');
+        } else {
+        return $this->render('gestion_compte/connexion.html.twig');
+        return $this->redirectToRoute('accueil');
+        }
     }
 
-    /**
-     * @Route("/login", name="login")
-     */
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
-        // if ($this->getUser()) {
-        //    $this->redirectToRoute('target_path');
-        // }
 
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('gestion_compte/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
-        return $this->redirectToRoute('index');
-    }
-
-            /**
-       * @Route("/deconnexion", name="deconnexion")
-       */
-      public function logout(){}
 
     /**
      * @Route("/gestion", name="gestion")
@@ -94,5 +74,13 @@ class GestionCompteController extends AbstractController
     public function gestion()
     {
         return $this->render('gestion_compte/gestion.html.twig');
+    }
+
+    /**
+     * @Route("/deconnexion", name="deconnexion")
+     */
+    public function logout()
+    {
+        throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
 }

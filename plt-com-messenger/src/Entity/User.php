@@ -2,7 +2,8 @@
 
 namespace App\Entity;
 
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -18,14 +19,14 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * message="L'email que vous avez indiqué est déjà utilisé !"
  * )
  */
-class User implements UserInterface \Serializable
+class User implements UserInterface
 {
     /**
      * @var int
      *
      * @ORM\Column(name="id_user", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue()
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idUser;
 
@@ -37,18 +38,18 @@ class User implements UserInterface \Serializable
     private $username;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="email", type="string", length=50, nullable=false)
+     * @ORM\Column(name="email", type="string", length=250, nullable=true, options={"default"="NULL"})
      * @Assert\NotBlank()
      * @Assert\Email()
      */
-    private $email;
+    private $email = 'NULL';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=50, nullable=false)
+     * @ORM\Column(name="password", type="string", length=250, nullable=false)
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire 8 caractères")
      */
     private $password;
@@ -57,8 +58,6 @@ class User implements UserInterface \Serializable
      * @Assert\EqualTo(propertyPath="password", message="Vous n'avez pas entré le même mot de passe")
      */
     public $confirm_password;
-
-
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
@@ -158,22 +157,33 @@ class User implements UserInterface \Serializable
         $this->roles[] = $role;
     }
 
-    public function serialize()
+    /**
+     * @return Collection|Groupe[]
+     */
+    public function getIdGroupe(): Collection
     {
-        return serialize([
-            $this->idUser,
-            $this->username,
-            $this->email,
-            $this->password
-        ]);
+        return $this->idGroupe;
     }
-    public function unserialize($string)
+
+    public function addIdGroupe(Groupe $idGroupe): self
     {
-        list(
-            $this->idUser,
-            $this->username,
-            $this->email,
-            $this->password
-        ) unserialize(string, ('allowed_class' => false));
+        if (!$this->idGroupe->contains($idGroupe)) {
+            $this->idGroupe[] = $idGroupe;
+            $idGroupe->addIdUser($this);
+        }
+
+        return $this;
     }
+
+    public function removeIdGroupe(Groupe $idGroupe): self
+    {
+        if ($this->idGroupe->contains($idGroupe)) {
+            $this->idGroupe->removeElement($idGroupe);
+            $idGroupe->removeIdUser($this);
+        }
+
+        return $this;
+    }
+
 }
+

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Message
  *
- * @ORM\Table(name="message", indexes={@ORM\Index(name="message_groupe_FK", columns={"id_groupe"}), @ORM\Index(name="message_user0_FK", columns={"id_user"})})
+ * @ORM\Table(name="message", indexes={@ORM\Index(name="message_user0_FK", columns={"id_user"}), @ORM\Index(name="message_groupe_FK", columns={"id_groupe"})})
  * @ORM\Entity
  */
 class Message
@@ -47,6 +47,47 @@ class Message
      * })
      */
     private $idUser;
+
+    public function getIdMessage(): ?int
+    {
+        return $this->idMessage;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(string $message): self
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    public function getIdGroupe(): ?Groupe
+    {
+        return $this->idGroupe;
+    }
+
+    public function setIdGroupe(?Groupe $idGroupe): self
+    {
+        $this->idGroupe = $idGroupe;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
 
 
 }

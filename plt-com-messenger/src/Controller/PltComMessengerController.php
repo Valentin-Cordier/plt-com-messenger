@@ -18,14 +18,16 @@ class PltComMessengerController extends AbstractController
     }
 
     /**
-     * @Route("/inde", name="inde")
+     * @Route("/index", name="accueil")
      */
     public function index()
     {
+
         return $this->render('plt_com_messenger/index.html.twig', [
             
         ]);
-    }
+        
+        }
 
     /**
      * @Route("/contact", name="contact")
