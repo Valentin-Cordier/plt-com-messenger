@@ -3,8 +3,6 @@ security:
         App\Entity\User:
             algorithm: auto
 
-
-
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: null }
@@ -31,16 +29,13 @@ security:
 
             logout:
                 path: deconnexion
-                target: index
-
-
+                target: base
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
-
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used

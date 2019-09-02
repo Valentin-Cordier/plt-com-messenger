@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index des Conversation{% endblock %}
+
+{% block body %}
+{% for user in users %}
+
+<div class="container_fluid">
+    <div class="row">
+        <div class="list-group col-md-4 mx-auto">
+            <a href="{{ path('conversation_show', {'id': user.idUser}) }}" class="list-group-item" style="text-align: center;">
+                {{ user.username }}
+            </a>
+        </div>
+
+        <div class="list-group-item col-md-8 mx-auto">
+            <a href="{{ path('conversation_show', {'id': user.idUser}) }}">
+                <p>L'utilisateur: {{ user.username }}</p>
+            </a>
+                <p>Message:</p>
+        </div>
+
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

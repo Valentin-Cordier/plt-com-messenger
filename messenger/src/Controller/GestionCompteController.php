@@ -58,12 +58,9 @@ class GestionCompteController extends AbstractController
      */
     public function connexion()
     {
-        if (app.user) {
-            return $this->redirectToRoute('accueil');
-        } else {
         return $this->render('gestion_compte/connexion.html.twig');
         return $this->redirectToRoute('accueil');
-        }
+        
     }
 
 
@@ -82,5 +79,6 @@ class GestionCompteController extends AbstractController
     public function logout()
     {
         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
+        
     }
 }
