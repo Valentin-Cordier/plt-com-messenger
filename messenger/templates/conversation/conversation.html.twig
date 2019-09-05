@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index des Conversation{% endblock %}
+
+{% block body %}
+{% for username in users %}
+
+<div class="container">
+    <div class="row">
+        {{ include ('conversation/users.html.twig') }}
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}

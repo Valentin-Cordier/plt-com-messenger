@@ -1,46 +1,65 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Index des Conversation{% endblock %}
 
-{% block title %}Conversation avec L'utilisateur{% endblock %}
-
-{% block stylesheets %}
-<link rel="stylesheet" href="../styles/bootstrap.min.css">
-<link rel="stylesheet" href="../styles/conversation_show.css">
-{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="../styles/bootstrap.min.css" />
+        {% endblock %}
 
 {% block body %}
+{% for username in users %}
 
-<div class="container_fluid">
+
+<div class="container">
     <div class="row">
-        <div class="list-group-item col-12">
-            <h3>Test</h3>
-        </div>
-
-        <div class="bubble col-md-3 mx-auto">
-            <div class="bubble-text">
+        
+        {{ include ('conversation/users.html.twig') }}
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <p>L'utilisateur:
+                      
+                    {{ username.username}}
+                      
+                    </p></a>
+                </div>
                 
-                <p>this is a simple bubble effect   <br/>width CSS pseudo element </p>
+                <div class="card-body conversation">
+                    <form action="{{ path('conversation_show', {'id': username.idUser}) }}" method="post">
+
+
+                        <div class="form-group">
+                            <div class="card-body conversation">
+                            {% for messages in message %}
+                                {{ messages.message }}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        {{ form_start(form) }}
+
+                            <div class="form-group">
+                                {{ form_row(form.message, {'attr': {'placeholder': 'Votre message ...', 'class': 'form-control'} }) }}
+                            </div> 
+
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Envoyé</button>
+                        </div>
+                        {{ form_end(form) }}
+                    </form>
+
+                </div>
+
             </div>
         </div>
 
-        <div class="bubble2 col-md-3 mx-auto">
-            <div class="bubble-text2">
-                    
-                <p>this is a simple bubble effect   <br/>width CSS pseudo element </p>
-        </div>
     </div>
+
 </div>
-
-        <div class="container_fluid">
-            <div class="row">
-                <div class="list-group-item col-12">
-                        <input class="text" type="text" name="text" placeholder="Ecrivez votre message" />
-                        <input type=button class="btn btn-primary" value="Envoyé le message" placeholder="Envoyé le message">
-                </div>
-             </div>
-        </div>
+{% endfor %}
 
 
-
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 {% endblock %}
