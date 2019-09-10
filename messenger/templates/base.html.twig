@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Accueil{% endblock %}</title>
-        <link rel="stylesheet" href="styles/bootstrap.min.css">
+        <link rel="stylesheet" href="/styles/bootstrap.min.css">
         {% block stylesheets %}
         {% endblock %}
     </head>
@@ -30,7 +30,7 @@
                         <a class="nav-link" href="{{ path('groupe') }}">Groupe</a>
                     </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="{{ path('deconnexion') }}">Déconnexion</a>
+                            <a class="nav-link" href="{{ path('deconnexion') }}">Dï¿½connexion</a>
                     </li>
             </nav>
                     {% else %}
@@ -40,7 +40,7 @@
                             <a class="nav-link" href="{{ path('connexion') }}">Connexion</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('inscription') }}">Créer un compte</a>
+                            <a class="nav-link" href="{{ path('inscription') }}">Crï¿½er un compte</a>
                         </li>
 
                       </ul>
@@ -54,7 +54,7 @@
                         <div class="row">
                              <div class="col-sm-2"></div>
                             <div class="col-sm-4"><a href="{{ path('connexion') }}"><button type="button" class="btn btn-primary btn-lg btn-block">Se connecter</button></a></div>
-                            <div class="col-sm-4"><a href="{{ path('inscription') }}"><button type="button" class="btn btn-primary btn-lg btn-block">Se créer un compte</button></a></div>
+                            <div class="col-sm-4"><a href="{{ path('inscription') }}"><button type="button" class="btn btn-primary btn-lg btn-block">Se crï¿½er un compte</button></a></div>
                             <div class="col-sm-2"></div>
 
                         </div>  

@@ -1,13 +1,14 @@
 {% block body %}
 
 {# {% if current user %} #}
+        
 
-<div class="list-group col-md-3">
-            <a href="{{ path('conversation_show', {'id': username.idUser}) }}" class="list-group-item" style="text-align: center;">
-                {{ username.username }}
+            <a href="{{ path('conversation_show', {'id': users.idUser}) }}" class="list-group-item" style="text-align: center;">
+                {{ users.username }}
             </a>
-        </div>
+        
     {# {% else %} #}
+        
 
 
     {# {% endif %} #}

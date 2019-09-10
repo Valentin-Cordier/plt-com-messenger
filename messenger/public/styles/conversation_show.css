@@ -1,48 +1,9 @@
-.list-group-item{
-    /*border: 10px black;*/
-}
-
-h3{
-    padding-left: 1em ;
-}
-
-
-.bubble-text{
-    background:#139ee0; 
-    color:#fff; 
-    padding:7px 15px; 
-    border-radius:3px; 
-    width:350px;
-}
-
-.bubble-text::after{
-content:""; 
-border-left:20px solid transparent;
-border-right:20px solid transparent;
-border-top: 20px solid #139ee0;
-position: absolute;
-}
-
-.bubble2{
-    margin-top: 70px;
-
-}
-.bubble-text2{
-    background:#139ee0; 
-    color:#fff; 
-    padding:7px 15px; 
-    border-radius:3px; 
-    width:350px;
-}
-
-.bubble-text2::after{
-content:""; 
-border-left:20px solid transparent;
-border-right:20px solid transparent;
-border-top: 20px solid #139ee0;
-position: absolute;
-}
-
-.text{
-    width: 100%;
+.conv{
+    background-color: grey;
+    color: white;
+    border-color: white;
+    border-radius: 2px;
+    width: auto;
+    height: auto;
+    text-align: center;
 }

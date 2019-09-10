@@ -19,6 +19,27 @@ class MessagePriRepository extends ServiceEntityRepository
         parent::__construct($registry, MessagePri::class);
     }
 
+    // public function findByMessage(int $id, int $idr) {
+    //     $query = $this->createQueryBuider('m')
+    //     // ->leftJoin('user.id_user', 'id_user')
+    //     ->select('m.message')
+    //     ->from('m.message_pri')
+    //     ->leftJoin('user.id_user', 'id_user')
+    //     ->where('m.id_user = :id_user')
+    //     ->setParameter(':id_user', $id)
+    //     ->andWhere('m.id_user_recevoir = :id_user_recevoir')
+    //     ->setParameter(':id_user_recevoir', $idr)
+    //     ->getQuery()
+    //     ;
+
+    //     try {
+    //         return $query->getOneOrNullResult();
+    //     }
+    //     catch (\Exception $e) {
+    //         throw new \Exception('Problème' . $e->getMessage() . $e->getLine());
+    //     }
+    // }
+
     // /**
     //  * @return MessagePri[] Returns an array of MessagePri objects
     //  */

@@ -50,7 +50,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=250, nullable=false)
-     * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire 8 caractères")
+     * @Assert\Length(min="4", minMessage="Votre mot de passe doit faire 4 caractères")
      */
     private $password;
 

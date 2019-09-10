@@ -1,62 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Index des Conversation{% endblock %}
+{% block title %}Index des Conversation, Hello {{ controller_name }}!{% endblock %}
 
-        {% block stylesheets %}
-        <link rel="stylesheet" href="../styles/bootstrap.min.css" />
+     {% block stylesheets %}
+            <link rel="stylesheet" href="/styles/conversation_show.css">
         {% endblock %}
 
 {% block body %}
-{% for username in users %}
+
+
 
 
 <div class="container">
+
     <div class="row">
-        
-        {{ include ('conversation/users.html.twig') }}
-        <div class="col-md-9">
-            <div class="card">
-                <div class="card-header">
-                    <p>L'utilisateur:
-                      
-                    {{ username.username}}
-                      
-                    </p></a>
-                </div>
-                
-                <div class="card-body conversation">
-                    <form action="{{ path('conversation_show', {'id': username.idUser}) }}" method="post">
+    
+        <div class="list-group col-md-2">
+            {{ include ('conversation/users.html.twig') }}
+        </div>
+         
+ 
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
+                        <p>L'utilisateur:
+                        
+                            {{users.username}}
+                            
+                        
+                        </p>
+                    </div>
 
+                    <div class="card-body conversation">
+                        <form action="" method="post">
 
-                        <div class="form-group">
-                            <div class="card-body conversation">
-                            {% for messages in message %}
-                                {{ messages.message }}
-                                {% endfor %}
-                            </div>
-                        </div>
-
-                        {{ form_start(form) }}
 
                             <div class="form-group">
-                                {{ form_row(form.message, {'attr': {'placeholder': 'Votre message ...', 'class': 'form-control'} }) }}
-                            </div> 
+                            {% for messages in message %}
+                                <div class="card-body conversation">
+                            <div class="conv">
+                            <h5>
+                            Username:   {{ messages.message }}
+                            </h5>
+                            </div>
+                            
+                                        
+                                
+                                </div>
+                                {% endfor %}
+                            </div>
 
-                        <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Envoyé</button>
-                        </div>
-                        {{ form_end(form) }}
-                    </form>
+                            {{ form_start(form) }}
+
+                                <div class="form-group">
+                                    {{ form_row(form.message, {'label': 'Message :','attr': {'placeholder': 'Votre message ...', 'class': 'form-control'} }) }}
+                                </div> 
+
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Envoyé</button>
+                            </div>
+                            {{ form_end(form) }}
+                        </form>
+
+                    </div>
 
                 </div>
-
             </div>
-        </div>
-
+        
+            {# {% endif %} #}
+        
     </div>
 
 </div>
-{% endfor %}
+
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
