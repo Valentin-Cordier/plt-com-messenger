@@ -1,15 +1,16 @@
+{% block stylesheets %}
+            <link rel="stylesheet" href="/styles/conversation.css">
+        {% endblock %}
+
 {% block body %}
 
-{# {% if current user %} #}
-        
 
+<div class="list">
             <a href="{{ path('conversation_show', {'id': users.idUser}) }}" class="list-group-item" style="text-align: center;">
-                {{ users.username }}
+            
+                {{ users.username}}  
             </a>
-        
-    {# {% else %} #}
-        
-
-
-    {# {% endif %} #}
+            <hr>
+        </div>
+       
     {% endblock %}

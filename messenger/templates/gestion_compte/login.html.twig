@@ -1,3 +1,5 @@
+{% if not is_granted("ROLE_USER") %}
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
@@ -38,3 +40,4 @@
     </button>
 </form>
 {% endblock %}
+{% endif %}

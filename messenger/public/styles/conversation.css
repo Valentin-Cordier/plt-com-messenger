@@ -1,0 +1,24 @@
+h2{
+    color: white;
+}
+
+hr{
+    background-color: white;
+}
+
+.list a{
+    background-color: darkgrey;
+    text-decoration: none;
+    margin: auto;
+    color:black;
+    margin-top: 1em auto;
+    border-radius: 5px;
+    
+}
+
+.list a:hover{
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    transition: 1s;
+
+}

@@ -2,12 +2,17 @@
 
 {% block title %}Index des Conversation{% endblock %}
 
+
+
 {% block body %}
+<h2 style="text-align:center;">Votre liste de contact dont vous avez déjà discutez !</h2>
 {% for users in users %}
 
 <div class="container">
     <div class="row">
-        {{ include ('conversation/users.html.twig') }}
+        <div class="list-group col-md-4 mx-auto">
+            {{ include ('conversation/users.html.twig') }}
+        </div>
 
     </div>
 

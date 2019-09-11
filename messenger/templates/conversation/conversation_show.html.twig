@@ -9,18 +9,18 @@
 {% block body %}
 
 
+<body>
 
-
-<div class="container">
+<div class="container-fluid">
 
     <div class="row">
-    
+    {# {% for users in users %} #}
         <div class="list-group col-md-2">
             {{ include ('conversation/users.html.twig') }}
         </div>
-         
+         {# {% endfor %} #}
  
-            <div class="col-md-10">
+            <div class="col-10 mx-auto">
                 <div class="card">
                     <div class="card-header">
                         <p>L'utilisateur:
@@ -32,16 +32,21 @@
                     </div>
 
                     <div class="card-body conversation">
-                        <form action="" method="post">
+                        <form action="{{ path('conversation_show', {'id': users.idUser}) }}" method="post">
 
 
                             <div class="form-group">
                             {% for messages in message %}
                                 <div class="card-body conversation">
                             <div class="conv">
+                            {{messages.idUser}} :
+                            
                             <h5>
-                            Username:   {{ messages.message }}
+                            
+                               {{ messages.message }}
+                               
                             </h5>
+                            
                             </div>
                             
                                         
@@ -49,16 +54,13 @@
                                 </div>
                                 {% endfor %}
                             </div>
-
+                            <hr>
                             {{ form_start(form) }}
 
-                                <div class="form-group">
+                                <div class="form-group2 col-md-12 mx-auto">
                                     {{ form_row(form.message, {'label': 'Message :','attr': {'placeholder': 'Votre message ...', 'class': 'form-control'} }) }}
+                                    <button class="btn btn-primary" type="submit">Envoyé</button>
                                 </div> 
-
-                            <div class="form-group">
-                                <button class="btn btn-primary" type="submit">Envoyé</button>
-                            </div>
                             {{ form_end(form) }}
                         </form>
 
@@ -72,7 +74,7 @@
     </div>
 
 </div>
-
+</body>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

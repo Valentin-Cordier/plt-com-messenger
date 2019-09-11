@@ -26,10 +26,17 @@ security:
             form_login: 
                 login_path: connexion
                 check_path: connexion
+                default_target_path: accueil
+
 
             logout:
                 path: deconnexion
                 target: index
+
+        # role_hierarchy:
+        #     ROLE_USER:          [ROLE_USER]
+        #     ROLE_ADMINGROUPE:   [ROLE_USER]
+        #     ROLE_SUPERADMIN:    [ROLE_ADMINGROUPE, ROLE_ALLOWED_TO_SWITCH]
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -39,4 +46,8 @@ security:
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
+    # access_control:
+    #     - { path: ^/gestion, roles: ROLE_SUPERADMIN }
+    #     # - { path: ^/profile, roles: ROLE_USER }
+    #     # - { path: ^/groupe/create, roles: ROLE_USER }
   

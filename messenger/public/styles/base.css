@@ -1,0 +1,22 @@
+body { 
+    background-color: black;
+}
+
+.btn-primary{
+    background-color: darkgrey !important;
+    color: white !important;
+    border-color: black !important;
+    border-width: 0 0 4px 0 !important;
+}
+
+.btn-primary:hover{
+    background-color: white !important;
+    color:black !important;
+    transition: 0.75s !important;
+    border-color: white !important;
+
+}
+
+a:hover{
+    text-decoration: none;
+}

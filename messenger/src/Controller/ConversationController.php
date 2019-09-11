@@ -73,7 +73,7 @@ class ConversationController extends AbstractController
     {
 
 
-
+        $username = $this->getUser();
         $user = $repo->find($id);
         $mess = $repo2->findByIdUserRecevoir($id);
         
