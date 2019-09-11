@@ -22,12 +22,14 @@ class ConversationController extends AbstractController
     {
         $repo = $this->getDoctrine()->getRepository(User::class);
         $username = $repo->findAll();
+         
         
 
         return $this->render('conversation/conversation.html.twig', [
             'users' => $username
         ]);  
-            
+           
+
     }
 
     //      /**

@@ -1,0 +1,22 @@
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Panel Admin{% endblock %}</title>
+        <link rel="stylesheet" href="/styles/bootstrap.min.css">
+        {% block stylesheets %}
+        {% endblock %}
+    </head>
+{% block body %}
+
+{{ include ('gestion_compte/gestion.html.twig') }}
+
+<div class="container-fluid-width=100%">
+<div class="row">
+<div class="col-12"><h2 style="text-align:center;">Test</h2></div>
+</div>
+</div>
+
+
+{% endblock %}
+</html>

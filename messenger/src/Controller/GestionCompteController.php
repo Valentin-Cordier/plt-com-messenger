@@ -71,7 +71,27 @@ class GestionCompteController extends AbstractController
     public function gestion()
     {
         return $this->render('gestion_compte/gestion.html.twig');
+
     }
+
+    /**
+     * @Route("/gestion/panel_admin", name="panel_admin")
+     */
+    public function gestionPA()
+    {
+        return $this->render('gestion_compte/panel_admin.html.twig');
+    }
+
+    /**
+     * @Route("/gestion/bdd_user", name="bdd_user")
+     */
+    public function gestionUser()
+    {
+        return $this->render('gestion_compte/bdd_user.html.twig');
+    }
+
+    
+
 
     /**
      * @Route("/deconnexion", name="deconnexion")

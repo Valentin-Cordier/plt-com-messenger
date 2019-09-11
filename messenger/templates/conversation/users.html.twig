@@ -4,6 +4,7 @@
 
 {% block body %}
 
+{# {% if app.user %} #}
 
 <div class="list">
             <a href="{{ path('conversation_show', {'id': users.idUser}) }}" class="list-group-item" style="text-align: center;">
@@ -12,5 +13,13 @@
             </a>
             <hr>
         </div>
-       
-    {% endblock %}
+{# {% else %}
+<div class="list">
+            <a href="{{ path('conversation_show', {'id': users.idUser}) }}" class="list-group-item" style="text-align: center;">
+            
+                {{ users.username}}  
+            </a>
+            <hr>
+        </div>
+{% endif %} #}
+{% endblock %}
