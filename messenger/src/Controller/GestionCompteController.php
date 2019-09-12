@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserType;
 use App\Form\RegistrationType;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
+use App\Security\LoginAuthenticator;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,9 +17,11 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use App\Security\LoginAuthenticator;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
+/**
+ * @Route("/gestion")
+ */
 class GestionCompteController extends AbstractController
 {
     /**
@@ -66,7 +71,7 @@ class GestionCompteController extends AbstractController
 
 
     /**
-     * @Route("/gestion", name="gestion")
+     * @Route("/", name="gestion")
      */
     public function gestion()
     {
@@ -75,7 +80,7 @@ class GestionCompteController extends AbstractController
     }
 
     /**
-     * @Route("/gestion/panel_admin", name="panel_admin")
+     * @Route("/panel_admin", name="panel_admin")
      */
     public function gestionPA()
     {
@@ -83,14 +88,49 @@ class GestionCompteController extends AbstractController
     }
 
     /**
-     * @Route("/gestion/bdd_user", name="bdd_user")
+     * @Route("/entity_user", name="entity_user")
+     * 
      */
-    public function gestionUser()
+    public function gestionUser(UserRepository $userRepository): Response
     {
-        return $this->render('gestion_compte/bdd_user.html.twig');
+        return $this->render('gestion_compte/entity_user.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
     }
 
-    
+    /**
+     * @Route("/entity_user/{idUser}/edit", name="user_edit", methods={"GET","POST"})
+     */
+    public function editUser(Request $request, User $user): Response
+    {
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('entity_user');
+        }
+
+        return $this->render('gestion_compte/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{idUser}", name="user_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, User $user): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$user->getIdUser(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($user);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('entity_user');
+    }
 
 
     /**

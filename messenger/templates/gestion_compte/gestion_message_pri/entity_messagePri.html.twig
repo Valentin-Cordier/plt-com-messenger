@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {% block title %}Message privé index
+
+            {% endblock %}
+
+        </title>
+        <link rel="stylesheet" href="/styles/bootstrap.min.css"> {% block stylesheets %}{% endblock %}
+        </head>
+
+
+        {% block body %}
+            {{ include('/gestion_compte/gestion.html.twig') }}
+
+            <div class="container-fluid">
+                <div class="row">
+                    <h1>MessagePri index</h1>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>IdMessage</th>
+                                <th>Message</th>
+                                <th>Nom User</th>
+                                <th>Nom User Recevoir</th>
+                                <th>actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for message_pri in message_pris %}
+                                <tr>
+                                    <td>{{ message_pri.idMessage }}</td>
+                                    <td>{{ message_pri.message }}</td>
+                                    <td>{{ message_pri.idUser }}</td>
+                                    <td>{{ message_pri.idUserRecevoir }}</td>
+                                    <td>
+
+
+                                        <form method="post" action="{{ path('message_pri_delete', {'idMessage': message_pri.idMessage}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ message_pri.idMessage) }}">
+                                            <button class="btn btn-primary">
+                                                <a href="{{ path('message_pri_edit', {'idMessage': message_pri.idMessage}) }}">edit</a>
+                                            </button>
+                                            <button class="btn btn-primary">Delete</button>
+                                        </form>
+
+
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="3">no records found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    {# <a href="{{ path('message_pri_new') }}">Create new</a> #}
+                </div>
+
+            </div>
+        {% endblock %}
+    </html>
