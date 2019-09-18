@@ -1,113 +1,151 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Index des Conversation, Hello {{ controller_name }}!{% endblock %}
+{% block title %}Index des Conversation, Hello
+    {{ controller_name }}!
+{% endblock %}
 
-     {% block stylesheets %}
-            <link rel="stylesheet" href="/styles/conversation_show.css">
-        {% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="/styles/conversation_show.css">
+{% endblock %}
 
 {% block body %}
 
 
-<body>
+    <body>
 
-    <!--Condition qui cherche si il ya des messages et si il y en à 
-    il les affiches si c'est pas le cas la condition invite à ce que l'utilisateur 
-    envoye un message pour démarrer la conversation-->
+        <!--Condition qui cherche si il ya des messages et si il y en à il les affiches si c'est pas le cas la condition invite à ce que l'utilisateur envoye un message pour démarrer la conversation-->
 
 
-    {% if user.messages|length > 0 %}
-        <div class="container-fluid">
-            <div class="row">
-                <div class="list-group col-md-2">
-                    {{ include ('conversation/users.html.twig') }}
-                </div>
-            
-                <div class="col-10 mx-auto">
-                    <div class="card">
-                        <div class="card-header">
-                            <p>L'utilisateur:
-                                {{users.username}}   
-                            </p>
+        {% if messages|length > 0 %}
+            {% if messages2|length > 0 %}
+
+
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="list-group col-md-2">
+                            {{ include ('conversation/users.html.twig') }}
                         </div>
 
-                        <div class="card-body conversation">
-                            <form action="{{ path('conversation_show', {'id': users.idUser}) }}" method="post">
-                                <div class="form-group">
-                                {% for messages in message %}
-                                    <div class="card-body conversation">
-                                        <div class="conv">
-                                            {{messages.idUser}} :
-                                            <h5>
-                                            {{ messages.message }}  
-                                            </h5>
+                        <div class="col-10 mx-auto">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>L'utilisateur:
+                                        {{users.username}}
+                                        <h2></div>
+
+                                        <div class="card-body conversation" id="exampleSelect2">
+
+                                            <form action="{{ path('conversation_show', {'id': users.idUser}) }}" method="post">
+                                                <div class="form-group">
+                                                    <div class="scrollbar scrollbar-lady-lips">
+                                                        <div
+                                                            class="force-overflow">
+
+                                                            {# {% if message is same as(true)%} #}
+
+                                                            {% for message in messages2 %}
+                                                                <div class="card-body conversation">
+                                                                    <div class="conv">
+                                                                        {{message.idUser}}
+                                                                        :
+                                                                        <h5>
+
+                                                                            {{ message.message }}
+
+
+                                                                        </h5>
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="scrollbar scrollbar-lady-lips">
+                                                        <div class="force-overflow">
+
+                                                            {% for messages in messages %}
+                                                                <div class="card-body conversation">
+                                                                    <div class="conv">
+                                                                        {{messages.idUser}}
+                                                                        :
+                                                                        <h5>
+
+
+                                                                            {{ messages.message }}
+
+                                                                        </h5>
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                    {# {% endif %} #}
+
+                                                </div>
+                                                <hr>
+                                                {{ form_start(form) }}
+
+                                                <div class="form-group2 col-md-12 mx-auto">
+                                                    {{ form_row(form.message, {'label': 'Message :','attr': {'placeholder': 'Votre message ...', 'class': 'form-control'} }) }}
+                                                    <button class="btn btn-primary" type="submit">Envoyé</button>
+                                                </div>
+                                                {{ form_end(form) }}
+                                            </form>
                                         </div>
                                     </div>
-                                {% endfor %}
                                 </div>
-                                <hr>
-                                {{ form_start(form) }}
-
-                                    <div class="form-group2 col-md-12 mx-auto">
-                                        {{ form_row(form.message, {'label': 'Message :','attr': {'placeholder': 'Votre message ...', 'class': 'form-control'} }) }}
-                                        <button class="btn btn-primary" type="submit">Envoyé</button>
-                                    </div> 
-                                {{ form_end(form) }}
-                            </form>
+                            </div>
                         </div>
-                    </div>
-                </div>  
-            </div>
-        </div>
-    {% else %}
-        <div class="container-fluid">
-            <div class="row">
-                <div class="list-group col-md-2">
-                    {{ include ('conversation/users.html.twig') }}
-                </div>
-                <div class="col-10 mx-auto">
-                    <div class="card">
-                        <div class="card-header">
-                            <p>L'utilisateur:
-                            
-                                {{users.username}}
-                                
-                            
-                            </p>
-                        </div>
+                    {% else %}
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="list-group col-md-2">
+                                    {{ include ('conversation/users.html.twig') }}
+                                </div>
+                                <div class="col-10 mx-auto">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h2>L'utilisateur:
 
-                        <div class="card-body conversation">
-                            <form action="{{ path('conversation_show', {'id': users.idUser}) }}" method="post">
-                                <div class="form-group">
-                                {% for messages in message %}
-                                    <div class="card-body conversation">
-                                        <div class="conv">
-                                        <h5>
-                                            Envoyé le premier message de la conversation  
-                                        </h5>
-                                        
+                                                {{users.username}}
+
+
+                                            </h2>
+                                        </div>
+
+                                        <div class="card-body conversation">
+                                            <form action="{{ path('conversation_show', {'id': users.idUser}) }}" method="post">
+                                                <div class="form-group">
+
+                                                    <div class="card-body conversation">
+                                                        <div class="conv">
+                                                            <h5>
+                                                                Envoyer le premier message de la conversation.
+                                                            </h5>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <hr>
+                                                {{ form_start(form) }}
+                                                <div class="form-group2 col-md-12 mx-auto">
+                                                    {{ form_row(form.message, {'label': 'Message :','attr': {'placeholder': 'Votre message ...', 'class': 'form-control'} }) }}
+                                                    <button class="btn btn-primary" type="submit">Envoyé</button>
+                                                </div>
+                                                {{ form_end(form) }}
+                                            </form>
                                         </div>
                                     </div>
-                                {% endfor %}
                                 </div>
-                                <hr>
-                                {{ form_start(form) }}
-                                    <div class="form-group2 col-md-12 mx-auto">
-                                        {{ form_row(form.message, {'label': 'Message :','attr': {'placeholder': 'Votre message ...', 'class': 'form-control'} }) }}
-                                        <button class="btn btn-primary" type="submit">Envoyé</button>
-                                    </div> 
-                                {{ form_end(form) }}
-                            </form>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endif %}
-</body>
+                    {% endif %}
+                {% endif %}
+            </body>
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-{% endblock %}
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        {% endblock %}

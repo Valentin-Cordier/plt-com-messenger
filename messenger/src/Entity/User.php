@@ -38,13 +38,13 @@ class User implements UserInterface
     private $username;
 
     /**
-     * @var string|null
+     * @var string
      *
-     * @ORM\Column(name="email", type="string", length=250, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="email", type="string", length=250, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Email()
      */
-    private $email = 'NULL';
+    private $email;
 
     /**
      * @var string
@@ -58,6 +58,7 @@ class User implements UserInterface
      * @Assert\EqualTo(propertyPath="password", message="Vous n'avez pas entré le même mot de passe")
      */
     public $confirm_password;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
@@ -66,12 +67,28 @@ class User implements UserInterface
     private $idGroupe;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Role", inversedBy="idUser")
+     * @ORM\JoinTable(name="userroles",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="id_user", referencedColumnName="id_user")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="id_role", referencedColumnName="id_role")
+     *   }
+     * )
+     */
+    private $idRole;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->idGroupe = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+        $this->idRole = new \Doctrine\Common\Collections\ArrayCollection();
+        }
 
     public function getIdUser(): ?int
     {
@@ -185,5 +202,32 @@ class User implements UserInterface
         return $this;
     }
 
-}
+    /**
+     * @return Collection|Groupe[]
+     */
+    public function getIdRole(): Collection
+    {
+        return $this->idRole;
+    }
 
+    public function addIdRole(Role $idRole): self
+    {
+        if (!$this->idRole->contains($idRole)) {
+            $this->idRole[] = $idRole;
+            $idRole->addIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdRole(Role $idRole): self
+    {
+        if ($this->idRole->contains($idRole)) {
+            $this->idRole->removeElement($idRole);
+            $idRole->removeIdUser($this);
+        }
+
+        return $this;
+    }
+
+}

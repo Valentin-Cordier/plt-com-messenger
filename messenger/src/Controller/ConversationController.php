@@ -20,7 +20,6 @@ class ConversationController extends AbstractController
      */
     public function index(UserRepository $repo)
     {
-        $repo = $this->getDoctrine()->getRepository(User::class);
         $username = $repo->findAll();
          
         
@@ -28,41 +27,7 @@ class ConversationController extends AbstractController
         return $this->render('conversation/conversation.html.twig', [
             'users' => $username
         ]);  
-           
-
     }
-
-    //      /**
-    //   * Permet l'affiche de la conversation avec l'utilisateur après un envoye de message
-    //   * 
-    //   * @Route("/conversation_show/{id}", name="envoi_message")
-    //   * 
-    //   */
-    //   public function envoi_message(Request $request,ObjectManager $manager)
-    //   {
-    //      $message = new MessagePri();
- 
-    //      $form = $this->createForm(MessagePriType::class, $message);
- 
-    //      $form->handleRequest($request);
- 
-    //      if($form->isSubmitted()) {
- 
-    //         $em = $this->getDoctrine()->getManager();
-            
-    //         $em->persist($message);
- 
-    //         $em->flush();
- 
-    //         return new Response('Message envoyé !');
-    //      }
- 
-    //      return $this->render('conversation_show.html.twig', [
-    //          'form' => $form->createView(),
-    //          'message' => $message
-    //      ]);
-         
-    //   }
 
     /**
      * Permet l'affiche de la conversation avec l'utiilisateur
@@ -71,35 +36,26 @@ class ConversationController extends AbstractController
      * 
      * @return Response
      */
-    public function show(Request $request, ObjectManager $manager, UserRepository $repo, MessagePriRepository $repo2, int $id): Response
+    public function show(Request $request, UserRepository $repo, MessagePriRepository $repo2, int $id): Response
     {
 
-
         $username = $this->getUser();
-        $user = $repo->find($id);
-        $mess = $repo2->findByIdUserRecevoir($id);
         
-
-        // if(!$article){
-        //     // Si aucun article n'est trouvé, nous créons une exception
-        //     throw $this->createNotFoundException('L\'article n\'existe pas');
-        // }
-
-
-        // Création du message envoyé dans la table 'message_pri'
+        $user = $repo->find($id);
+        
         $message = new MessagePri();
 
-        
-        $form = $this->createForm(MessagePriType::class, $message);
+          $form = $this->createForm(MessagePriType::class, $message);
 
         $form->handleRequest($request);
-
 
         if($form->isSubmitted()  && $form->isValid()) {
 
             $message->setIdUserRecevoir($user);
             $message->setIdUser($this->getUser());
 
+
+            //Verifie ce qu'il envoi avec un dump
             dump($message);
 
            $em = $this->getDoctrine()->getManager();
@@ -108,17 +64,27 @@ class ConversationController extends AbstractController
 
            $em->flush();
 
-        //    return new Response('Message envoyé !');
         }
-
+        $messages = $repo2->findByIdUser(array($id));
+        $messages2 = $repo2->findByIdUserRecevoir(array($id));
 
         return $this->render('conversation/conversation_show.html.twig', [
             'controller_name' => 'Administrateur',
             'form' => $form->createView(),
             'users' => $user,   
-            'message' => $mess,
-
+            'messages' => $messages2,   
+            'messages2' => $messages,
         ]);
+        // }
+        
+
+
+
+        // Création du message envoyé dans la table 'message_pri'
+        
+
+        
+      
 
     }
 }
