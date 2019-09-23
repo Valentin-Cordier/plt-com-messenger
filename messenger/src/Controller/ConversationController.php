@@ -22,8 +22,6 @@ class ConversationController extends AbstractController
     {
         $username = $repo->findAll();
          
-        
-
         return $this->render('conversation/conversation.html.twig', [
             'users' => $username
         ]);  
@@ -36,20 +34,24 @@ class ConversationController extends AbstractController
      * 
      * @return Response
      */
-    public function show(Request $request, UserRepository $repo, MessagePriRepository $repo2, int $id): Response
+    public function show(Request $request, UserRepository $repo, MessagePriRepository $repo2, $id): Response
     {
 
         $username = $this->getUser();
+   
         
         $user = $repo->find($id);
-        
+        // Création du message envoyé dans la table 'message_pri'
         $message = new MessagePri();
+        
 
-          $form = $this->createForm(MessagePriType::class, $message);
+        $form = $this->createForm(MessagePriType::class, $message);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted()  && $form->isValid()) {
+
+            
 
             $message->setIdUserRecevoir($user);
             $message->setIdUser($this->getUser());
@@ -65,17 +67,30 @@ class ConversationController extends AbstractController
            $em->flush();
 
         }
+
+
+
+        //Récupération des messages depuis le repository lier à l'entity MessagePri
+
+        if($user != $username) {
+                
         $messages = $repo2->findByIdUser(array($id));
         $messages2 = $repo2->findByIdUserRecevoir(array($id));
+
+        } else{
+            return $this->redirectToRoute('conversation');
+        }
+        
+        
 
         return $this->render('conversation/conversation_show.html.twig', [
             'controller_name' => 'Administrateur',
             'form' => $form->createView(),
-            'users' => $user,   
-            'messages' => $messages2,   
-            'messages2' => $messages,
+            'users' => $user,      
+            'messages' =>  $messages,
+            'messages2' =>  $messages2,   
         ]);
-        // }
+        
         
 
 

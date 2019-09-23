@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\MessagePri;
+use App\Entity\User;
 use App\Form\MessagePri1Type;
 use App\Repository\MessagePriRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,7 +70,7 @@ class MessagePriController extends AbstractController
     // }
 
     /**
-     * @Route("/{idMessage}/edit", name="message_pri_edit", methods={"GET","POST"})
+     * @Route("/entity_message_pri/{idMessage}/edit", name="message_pri_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, MessagePri $messagePri): Response
     {
@@ -89,7 +90,7 @@ class MessagePriController extends AbstractController
     }
 
     /**
-     * @Route("/{idMessage}", name="message_pri_delete", methods={"DELETE"})
+     * @Route("/entity_message_pri/{idMessage}", name="message_pri_delete", methods={"DELETE"})
      */
     public function delete(Request $request, MessagePri $messagePri): Response
     {
