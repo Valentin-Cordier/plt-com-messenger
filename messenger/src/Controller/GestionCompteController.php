@@ -61,9 +61,13 @@ class GestionCompteController extends AbstractController
     /**
      * @Route("/connexion", name="connexion")
      */
-    public function connexion()
+    public function connexion(AuthenticationUtils $authenticationUtils)
     {
-        return $this->render('gestion_compte/connexion.html.twig');
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        return $this->render('gestion_compte/connexion.html.twig', [
+            'error' => $error,
+        ]);
         return $this->redirectToRoute('accueil');
         
     }

@@ -1,24 +1,36 @@
 h2{
-    color: white;
+    color: black;
+    margin: 1em;
 }
 
 hr{
-    background-color: white ;
+    background-color: #05427D ;
 }
 
 .list a{
-    background-color: darkgrey;
+    background-color: #05427D;
     text-decoration: none;
     margin: auto;
-    color:black;
-    margin-top: 1em auto;
-    border-radius: 5px;
+    color: white;
+    margin-top: 1em auto !important;
+    border-radius: 2em !important;
     
 }
 
 .list a:hover{
-    color: rgb(0, 0, 0);
-    background-color: rgb(255, 255, 255);
+    color: white;
+    background-color: rgb(141, 141, 141);
     transition: 1s;
 
 }
+
+.list-group {
+    background-color: white !important; 
+     border: 0px solid white !important; 
+     border-radius: 0px !important;
+}
+
+/* .list-group-item:first-child {
+     border-top-left-radius: none !important; 
+     border-top-right-radius: none !important;
+} */

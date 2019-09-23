@@ -1,12 +1,20 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+
 body { 
-    background-color: black;
+    background: white;
+}
+
+a{
+    text-decoration: none;
 }
 
 .btn-primary{
-    background-color: darkgrey !important;
+    background-color: #05427D !important;
     color: white !important;
     border-color: black !important;
     border-width: 0 0 4px 0 !important;
+    border-radius: 25px !important;
 }
 
 .btn-primary:hover{
@@ -20,3 +28,44 @@ body {
 a:hover{
     text-decoration: none;
 }
+
+.parallax-element {
+    background: transparent;
+    padding: 17%;
+    display: block !important;
+}
+
+.bg-dark {
+    background-color: #05427D !important;
+    border-color: white !important;
+}
+
+.description {
+    
+    background-color: rgba(255, 255, 255, 0.596);
+    color: black;
+    border-radius: 25px;
+    width: auto;
+    height: auto;
+    text-align: center;
+    /* padding: 1em; */
+    font-weight: bold;
+    margin: auto;
+    /* opacity: 0.5; */
+}
+
+h1, h2, h3{
+    font-weight: bold;
+    font-size: 2em;
+    /* font-family: PT Sans; */
+}
+.log {
+    background-color: rgba(255, 255, 255, 0.596);
+    color: black;
+    border-radius: 25px;
+    width: auto;
+    height: auto;
+    text-align: center;
+    padding: 2em;
+}
+

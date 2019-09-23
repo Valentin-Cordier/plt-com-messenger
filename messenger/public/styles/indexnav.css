@@ -1,0 +1,13 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+
+.parallax-element {
+    background: transparent;
+    padding: 17%;
+    display: block !important;
+}
+
+.bg-dark {
+    background-color: #05427D !important;
+    border-color: white !important;
+}
