@@ -42,6 +42,8 @@ class ConversationController extends AbstractController
         
         $user = $repo->find($id);
         // Création du message envoyé dans la table 'message_pri'
+        // Mais avant on génére la conversation via le formulaire 
+        //(enfin une partie car le rest ce fais dans le template)
         $message = new MessagePri();
         
 
@@ -74,8 +76,8 @@ class ConversationController extends AbstractController
 
         if($user != $username) {
                 
-        $messages = $repo2->findByIdUser(array($id));
-        $messages2 = $repo2->findByIdUserRecevoir(array($id));
+        $messages = $repo2->findByIdUser($id);
+        $messages2 = $repo2->findByIdUserRecevoir($id);
 
         } else{
             return $this->redirectToRoute('conversation');

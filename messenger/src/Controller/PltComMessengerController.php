@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\User;
+use App\Entity\MessagePri;
+use App\Repository\MessagePriRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PltComMessengerController extends AbstractController
 {
@@ -20,11 +23,13 @@ class PltComMessengerController extends AbstractController
     /**
      * @Route("/index", name="accueil")
      */
-    public function index()
+    public function index(MessagePriRepository $repo)
     {
 
+        $message = $repo->findByIdUserRecevoir(array(['id' => 'ASC', 5]));
+
         return $this->render('plt_com_messenger/index.html.twig', [
-            
+            'message' => $message
         ]);
         
         }

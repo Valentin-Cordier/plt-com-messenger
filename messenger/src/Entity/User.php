@@ -47,6 +47,11 @@ class User implements UserInterface
     private $email;
 
     /**
+     * @Assert\EqualTo(propertyPath="email", message="Les adresses emails doit correspondre")
+     */
+    public $confirm_email;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=250, nullable=false)
