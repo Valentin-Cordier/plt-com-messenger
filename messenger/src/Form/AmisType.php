@@ -2,24 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\MessagePri;
+use App\Entity\Amis;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MessagePriType extends AbstractType
+class AmisType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('message')
+            ->add('idAmis')
+            ->add('username')
+            ->add('email')
+            ->add('idUser')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => MessagePri::class,
+            'data_class' => Amis::class,
         ]);
     }
 }

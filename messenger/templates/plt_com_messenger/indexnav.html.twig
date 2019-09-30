@@ -48,14 +48,6 @@
 
 
                     </ul>
-                    <ul class="navbar-nav mr-auto">
-
-                        <a class="navbar-brand" href="{{ path('accueil') }}">
-                            <i class="fa fa-comments fa-2x"></i>
-
-
-                            Messenger&CO</a>
-                    </ul>
                     <ul class="navbar-nav ml-auto">
 
 
@@ -66,40 +58,69 @@
 
                         </li>
                     </ul>
-                </nav>
+                    </div></nav>
+
+                    <figure class="navbar-nav mr-auto">
+
+                        <a class="navbar-brand" style="color: white;" href="{{ path('accueil') }}">
+                            <i class="fa fa-comments-o fa-2x"></i>
 
 
-                <!--Parallax-->
+                            Messenger&CO</a>
+                    </figure>
+
+                    <!--Parallax-->
 
 
-                <div class="parallax-element" id="Accueil" data-parallax="scroll" data-image-src="images/mi1.png" alt="" id=""></div>
+                    <div
+                        class="parallax-element" id="Accueil" data-parallax="scroll" data-image-src="images/mi1.png" alt="" id="">{# {% if app.user  %}
+                                                                            
+                                                                                                    <div class="card-body conversation">
+                                                                                                        <div class="description">
+                                                                                                            <h1>Bienvenue
+                                                                                                                {{users.username}}
+                                                                                                                et profite des fonctionnalités de l'application</h1>
+                                                                            
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                {% else %}
+                                                                                                    <div class="card-body conversation">
+                                                                                                        <div class="description">
+                                                                                                            <h1>Bon retour à toi,
+                                                                                                                {{users.username}}. Ca fait plaisir de te revoir.</h1>
+                                                                            
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                {% endif %} #}
+
+                    </div>
 
 
-                <div class="parallax-element" id="Accueil" data-parallax="scroll" data-image-src="images/mi2.png" alt="" id="">
+                    <div class="parallax-element" id="Accueil" data-parallax="scroll" data-image-src="images/mi2.png" alt="" id="">
 
-                    {% for messages in message %}
+                        {% for messages in message %}
 
-                        <div class="card-body conversation">
-
-
-                            <div class="conv">
+                            <div class="card-body conversation">
 
 
-                                {{messages.idUser}}
-                                :
-                                <h5>
+                                <div class="conv">
 
 
-                                    {{ messages.message|title }}
+                                    {{messages.idUser}}
+                                    :
+                                    <h5>
 
-                                </h5>
+
+                                        {{ messages.message|title }}
+
+                                    </h5>
 
 
+                                </div>
                             </div>
-                        </div>
 
-                    {% endfor %}
-                </div>
+                        {% endfor %}
+                    </div>
 
 
                     <div class="parallax-element" id="Accueil" data-parallax="scroll" data-image-src="images/mi3.png" alt="" id=""></div>

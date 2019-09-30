@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\MessagePri;
+// use App\Repository\UserRepository;
 use App\Repository\MessagePriRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,20 +28,14 @@ class PltComMessengerController extends AbstractController
     {
 
         $message = $repo->findByIdUserRecevoir(array(['id' => 'ASC', 5]));
+         //$user = $repo2->find($id);
 
         return $this->render('plt_com_messenger/index.html.twig', [
-            'message' => $message
+            'message' => $message,
+            // 'users' => $user,
         ]);
         
         }
-
-    /**
-     * @Route("/contact", name="contact")
-     */
-    public function contact()
-    {
-        return $this->render('plt_com_messenger/contact.html.twig');
-    }
 
     /**
      * @Route("/musique", name="musique")

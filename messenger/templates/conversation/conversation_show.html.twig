@@ -8,13 +8,16 @@
     <link rel="stylesheet" href="/styles/conversation_show.css">
 {% endblock %}
 
+
+
 {% block body %}
 
 
     <!--Condition qui cherche si il ya des messages et si il y en à il les affiches si c'est pas le cas la condition invite à ce que l'utilisateur envoye un message pour démarrer la conversation-->
 
 
-    {% if messages is not empty and messages2 is not empty %}
+    {# {% if messages is not empty and messages2 is not empty %} #}
+{% if messages is empty and messages2 is not empty %}
 
 
         <div class="container-fluid">
@@ -33,84 +36,39 @@
 
 
                                 <form action="{{ path('conversation_show', {'id': users.idUser}) }}" method="post">
-                                    <div class="scrollbar scrollbar-primary">
+                                        <div class="scrollbar scrollbar-primary">
 
 
-                                        <div class="force-overflow">
-
-                                        <div class="card-body conversation" id="exampleSelect2">
+                                            <div class="force-overflow">
 
 
-                                            <div
-                                                class="form-group">
-
-                                                {# {% if message is same as(true)%}  #}
-
-
-                                                {% for message in messages %}
+                                                <pre>{% for messages in messages2 %}</pre>
 
 
                                                     <div class="card-body conversation">
 <hr>
 
-
-                                                        <div class="conv">
-
-
-
-                                                            {{message.idUser}}
-                                                            :
-                                                            <h5>
-
-                                                                {{ message.message|title }}
-
-
-                                                            </h5>
-
-
-                                                        </div>
-                                                    </div>
-
-
-                                                {% endfor %}
-
-
-                                                {% for messages in messages2 %}
-
-
-                                                    <div class="card-body conversation">
-<hr>
-
-                                                        <div class="conv">
+                                                <div class="conv">
 
 
 
-                                                            {{messages.idUser}}
-                                                            :
-                                                            <h5>
+                                                    {{messages.idUser}}
+                                                    :
+                                                    <h5>
 
 
-                                                                {{ messages.message|title }}
+                                                        <pre>{{ messages.message|title }}</pre>
 
-                                                            </h5>
-
-
-                                                        </div>
-                                                    </div>
+                                                    </h5>
 
 
-                                                {% endfor %}
+                                                </div>
                                             </div>
-                                            </div>
-</div>
 
 
-
-                                            {# {% endif %} #}
-
+                                        {% endfor %}
                                         </div>
-
-
+                                    </div>
                                         <hr>
 
 
@@ -141,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                
 
 
 <hr>
@@ -269,7 +227,442 @@
             </footer>
 
 
-        {% else %}
+            {# {{ include ('conversation/conversation_show2.html.twig') }} #}
+
+
+            {# {{ include ('conversation/conversation_show3.html.twig') }} #}
+
+{% elseif messages is not empty and messages2 is empty %}
+<!--Condition qui cherche si il ya des messages et si il y en à il les affiches si c'est pas le cas la condition invite à ce que l'utilisateur envoye un message pour démarrer la conversation-->
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="list-group col-md-2">
+            {{ include ('conversation/users.html.twig') }}
+        </div>
+
+        <div class="col-10 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h2>L'utilisateur:
+                        {{users.username}}
+                    </h2>
+                </div>
+
+
+                <form action="{{ path('conversation_show', {'id': users.idUser}) }}" method="post">
+                <div class="scrollbar scrollbar-primary">
+
+
+                    <div class="force-overflow">
+
+
+                    {% for message in messages %}
+
+
+                        <div class="card-body conversation">
+                            <hr>
+
+                            <div class="conv">
+
+
+                                {{message.idUser}}
+                                :
+                                <h5>
+
+
+                                    {{ message.message|title }}
+
+                                </h5>
+
+
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                    </div>
+                </div>
+
+
+                    <hr>
+
+
+                    <!--Formulaire d'envoye de messages-->
+
+                    {{ form_start(form) }}
+
+                        <div class="form-group2 col-md-12 mx-auto">
+                            {{ form_row(form.message, {'label': 'Message :','attr': {'placeholder': 'Votre message ...', 'class': 'form-control'} }) }}
+
+                        </div>
+                        <br>
+                        <div class="form-group2 col-md-2 mx-auto">
+                            <button class="btn btn-primary" type="submit">Envoyé</button>
+
+                        </div>
+
+
+                    {{ form_end(form) }}
+
+                    <!--Fin du formulaire-->
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<!-- Footer -->
+<footer class="page-footer font-small unique-color-dark">
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left mt-5">
+
+        <!-- Grid row -->
+        <div class="row mt-3">
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                <!-- Content -->
+                <h6 class="text-uppercase font-weight-bold">
+                    <i class="fa fa-comments-o fa-1x"></i>
+                    Messenger&CO
+                </h6>
+
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>Est une application Web et mobile pour la discution privé et groupe.</p>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                <!-- Links -->
+                <h6 class="text-uppercase font-weight-bold">Products</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>
+                    <a href="#!">MDBootstrap</a>
+                </p>
+                <p>
+                    <a href="#!">MDWordPress</a>
+                </p>
+                <p>
+                    <a href="#!">BrandFlow</a>
+                </p>
+                <p>
+                    <a href="#!">Bootstrap Angular</a>
+                </p>
+                </p>
+            </div>
+
+        <!-- Grid column -->
+
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>
+                <a href="#!">Your Account</a>
+            </p>
+            <p>
+                <a href="#!">Become an Affiliate</a>
+            </p>
+            <p>
+                <a href="#!">Shipping Rates</a>
+            </p>
+            <p>
+                <a href="#!">Help</a>
+            </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Contact</h6>
+            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>
+                <i class="fa fa-home mr-3"></i>
+                Charleville-Mézière, 08000, France</p>
+            <p>
+                <i class="fa fa-envelope mr-3"></i>
+                v.cordier08200@gmail.com</p>
+            <p>
+                <i class="fa fa-phone mr-3"></i>
+                + 06-10-45-61-01</p>
+        </div>
+        <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+</div>
+<!-- Footer Links -->
+
+<!-- Copyright -->
+<div style="background-color: #05427D;">
+    <div class="footer-mentions-legale text-center py-3">
+
+        <a href="#" style="color: white;">Mentions légale</a>
+    </div>
+
+    <div class="footer-copyright text-center py-3" style="color: white;">
+
+
+        © 2019 Copyright:
+        <a href="{{ path('accueil') }}" style="color: white;hover: color: darkgrey;">
+
+
+            Messenger&CO</a>
+    </div>
+</div>
+<!-- Copyright -->
+</footer>
+
+
+
+
+
+{% elseif messages is not empty and messages2 is not empty %}
+
+
+<!--Condition qui cherche si il ya des messages et si il y en à il les affiches si c'est pas le cas la condition invite à ce que l'utilisateur envoye un message pour démarrer la conversation-->
+
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="list-group col-md-2">
+            {{ include ('conversation/users.html.twig') }}
+        </div>
+
+        <div class="col-10 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h2>L'utilisateur:
+                        {{users.username}}
+                    </h2>
+                </div>
+
+
+                <form action="{{ path('conversation_show', {'id': users.idUser}) }}" method="post">
+                <div class="scrollbar scrollbar-primary">
+
+
+                    <div class="force-overflow">
+
+
+                    {% for message in messages %}
+
+
+                        <div class="card-body conversation">
+                            <hr>
+
+                            <div class="conv">
+
+
+                                {{message.idUser}}
+                                :
+                                <h5>
+
+
+                                    {{ message.message|title }}
+
+                                </h5>
+
+
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+
+                    {% for messages in messages2 %}
+
+
+                        <div class="card-body conversation">
+                            <hr>
+
+                            <div class="conv">
+
+
+                                {{messages.idUser}}
+                                :
+                                <h5>
+
+
+                                    {{ messages.message|title }}
+
+                                </h5>
+
+
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                    </div>
+                </div>
+
+                    <hr>
+
+
+                    <!--Formulaire d'envoye de messages-->
+
+                    {{ form_start(form) }}
+
+                    <div class="form-group2 col-md-12 mx-auto">
+                        {{ form_row(form.message, {'label': 'Message :','attr': {'placeholder': 'Votre message ...', 'class': 'form-control'} }) }}
+
+                    </div>
+                    <br>
+                    <div class="form-group2 col-md-2 mx-auto">
+                        <button class="btn btn-primary" type="submit">Envoyé</button>
+
+                    </div>
+
+
+                    {{ form_end(form) }}
+
+                    <!--Fin du formulaire-->
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<!-- Footer -->
+<footer
+    class="page-footer font-small unique-color-dark">
+
+    <!-- Footer Links -->
+    <div
+        class="container text-center text-md-left mt-5">
+
+        <!-- Grid row -->
+        <div
+            class="row mt-3">
+
+            <!-- Grid column -->
+            <div
+                class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                <!-- Content -->
+                <h6 class="text-uppercase font-weight-bold">
+                    <i class="fa fa-comments-o fa-1x"></i>
+                    Messenger&CO
+                </h6>
+
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>Est une application Web et mobile pour la discution privé et groupe.</p>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div
+                class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                <!-- Links -->
+                <h6 class="text-uppercase font-weight-bold">Products</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>
+                    <a href="#!">MDBootstrap</a>
+                </p>
+                <p>
+                    <a href="#!">MDWordPress</a>
+                </p>
+                <p>
+                    <a href="#!">BrandFlow</a>
+                </p>
+                <p>
+                    <a href="#!">Bootstrap Angular</a>
+                </p>
+            </p>
+        </div>
+
+        <!-- Grid column -->
+
+
+        <!-- Grid column -->
+        <div
+            class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>
+                <a href="#!">Your Account</a>
+            </p>
+            <p>
+                <a href="#!">Become an Affiliate</a>
+            </p>
+            <p>
+                <a href="#!">Shipping Rates</a>
+            </p>
+            <p>
+                <a href="#!">Help</a>
+            </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div
+            class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Contact</h6>
+            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>
+                <i class="fa fa-home mr-3"></i>
+                Charleville-Mézière, 08000, France</p>
+            <p>
+                <i class="fa fa-envelope mr-3"></i>
+                v.cordier08200@gmail.com</p>
+            <p>
+                <i class="fa fa-phone mr-3"></i>
+                + 06-10-45-61-01</p>
+        </div>
+        <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+</div>
+<!-- Footer Links -->
+
+<!-- Copyright -->
+<div style="background-color: #05427D;">
+    <div class="footer-mentions-legale text-center py-3">
+
+        <a href="#" style="color: white;">Mentions légale</a>
+    </div>
+
+    <div class="footer-copyright text-center py-3" style="color: white;">
+
+
+        © 2019 Copyright:
+        <a href="{{ path('accueil') }}" style="color: white;hover: color: darkgrey;">
+
+
+            Messenger&CO</a>
+    </div>
+</div>
+<!-- Copyright --></footer>
+
+
+
+{% else %}
             <div class="container-fluid">
                 <div class="row">
                     <div class="list-group col-md-2">
@@ -320,6 +713,8 @@
                     </div>
                 </div>
             </div>
+    
+
 
             <br>
             <!-- Footer -->
@@ -443,10 +838,11 @@
             <!-- Copyright -->
         </footer>
 
-    {% endif %}
+    
+{% endif %}
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+  
 {% endblock %}

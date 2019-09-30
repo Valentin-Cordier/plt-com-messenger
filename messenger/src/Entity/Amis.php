@@ -36,13 +36,6 @@ class Amis
     private $email = 'NULL';
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=250, nullable=false)
-     */
-    private $password;
-
-    /**
      * @var \User
      *
      * @ORM\Id
@@ -53,6 +46,8 @@ class Amis
      * })
      */
     private $idUser;
+
+
 
 
 }

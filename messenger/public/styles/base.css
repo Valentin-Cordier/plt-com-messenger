@@ -1,4 +1,4 @@
-@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+@import url(//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 
 body { 
@@ -68,5 +68,19 @@ h1, h2, h3{
     height: auto;
     text-align: center;
     padding: 2em;
+}
+
+figure{
+    position:absolute; 
+    top: 0.2em; 
+    left: 1em; 
+    color: black;
+}
+
+@media screen and (min-width: 992px){
+    figure{
+        left: 42.5%;
+        top: 0.4em;
+    }
 }
 

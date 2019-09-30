@@ -1,4 +1,4 @@
-@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+@import url(//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 
 .parallax-element {
@@ -10,4 +10,18 @@
 .bg-dark {
     background-color: #05427D !important;
     border-color: white !important;
+}
+
+figure{
+    position:absolute; 
+    top: 0.2em; 
+    left: 1em; 
+    color: black;
+}
+
+@media screen and (min-width: 992px){
+    figure{
+        left: 42.5%;
+        top: 0.4em;
+    }
 }
