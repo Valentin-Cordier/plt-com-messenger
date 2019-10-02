@@ -51,13 +51,19 @@
 
                         <!--Fonction avec le temps le cooté musique-->
                     {# <li class="nav-item">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <a class="nav-link" href="{{ path('musique') }}">Conversation</a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </li> #}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <a class="nav-link" href="{{ path('musique') }}">Conversation</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </li> #}
                         <!--Fin de l'ajout-->
                     </ul>
 
 
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('profile')}}">
+
+                                <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                            </a>
+                        </li>
 
 
                         <li class="nav-item">
@@ -233,118 +239,8 @@
         <!--Fin des Parallax-->
 
 
-        <!-- Footer -->
-        <footer
-            class="page-footer font-small unique-color-dark">
+        {% include 'footer.html.twig' %}
 
-            <!-- Footer Links -->
-            <div
-                class="container text-center text-md-left mt-5">
-
-                <!-- Grid row -->
-                <div
-                    class="row mt-3">
-
-                    <!-- Grid column -->
-                    <div
-                        class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-
-                        <!-- Content -->
-                        <h6 class="text-uppercase font-weight-bold">
-                            <i class="fa fa-comments-o fa-1x"></i>
-                            Messenger&CO
-                        </h6>
-
-                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                        <p>Est une application Web et mobile pour la discution privé et groupe.</p>
-
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div
-                        class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
-                        <!-- Links -->
-                        <h6 class="text-uppercase font-weight-bold">Products</h6>
-                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                        <p>
-                            <a href="#!">MDBootstrap</a>
-                        </p>
-                        <p>
-                            <a href="#!">MDWordPress</a>
-                        </p>
-                        <p>
-                            <a href="#!">BrandFlow</a>
-                        </p>
-                        <p>
-                            <a href="#!">Bootstrap Angular</a>
-                        </p>
-                    </p>
-                </div><!-- Grid column --><!-- Grid column --><div
-                    class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
-                    <!-- Links -->
-                    <h6 class="text-uppercase font-weight-bold">Useful links</h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                    <p>
-                        <a href="#!">Your Account</a>
-                    </p>
-                    <p>
-                        <a href="#!">Become an Affiliate</a>
-                    </p>
-                    <p>
-                        <a href="#!">Shipping Rates</a>
-                    </p>
-                    <p>
-                        <a href="#!">Help</a>
-                    </p>
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div
-                    class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
-                    <!-- Links -->
-                    <h6 class="text-uppercase font-weight-bold">Contact</h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                    <p>
-                        <i class="fa fa-home mr-3"></i>
-                        Charleville-Mézière, 08000, France</p>
-                    <p>
-                        <i class="fa fa-envelope mr-3"></i>
-                        v.cordier08200@gmail.com</p>
-                    <p>
-                        <i class="fa fa-phone mr-3"></i>
-                        + 06-10-45-61-01</p>
-                </div>
-                <!-- Grid column -->
-
-            </div>
-            <!-- Grid row -->
-
-
-        </div>
-        <!-- Footer Links -->
-
-        <!-- Copyright -->
-        <div style="background-color: #05427D;">
-            <div class="footer-mentions-legale text-center py-3">
-
-                <a href="{{ path('index') }}" style="color: white;">Mentions légale</a>
-            </div>
-
-            <div class="footer-copyright text-center py-3" style="color: white;">
-
-
-                © 2019 Copyright:
-                <a href="{{ path('index') }}" style="color: white;hover: color: darkgrey;">
-
-
-                    Messenger&CO</a>
-            </div>
-        </div>
-        <!-- Copyright -->
-    </body>
-</html></body></html></footer><!-- Footer -->{% endif %}{% endif %}{% block body %}{% endblock %}
+    {% endif %}
+{% endif %}
+{% block body %}{% endblock %}</body></html>

@@ -16,8 +16,63 @@
         <div class="container-fluid">
             <div class="row">
 
-                <div class="list col-md-6 mr-auto">
+                <div class="list col-md-5 mr-auto">
                     <h1 class="text-center">Les amis de "{{ user.username|title }}":</h1>
+                    <br>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control col-sm-10" type="text" placeholder="Search">
+                        <button class="btn btn-secondary col-2 col-sm-2 mx-auto" type="submit">Search</button>
+                    </form>
+
+                    {% for ami in amis %}
+                        <br>
+                        <div class="list col-md-12 mx-auto">
+
+                            <h4>{{ ami.idUserAmis|title }}</h4>
+
+
+                            <div class="list col-md-2 ml-auto">
+
+
+                                <a href="{{ path('profil') }}">
+
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </a>
+
+
+                                <a href="{{ path('conversation') }}">
+                                    <i class="fa fa-comments " aria-hidden="true"></i>
+
+                                </a>
+
+
+                                <form method="post" action="{{ path('amis_delete', {'idAmis': ami.idAmis}) }}" onsubmit=" return confirm('tu est sur de vouloir retirer cette amis de la liste ?');">
+
+                                    <input type="hidden" name="_method" value="DELETE">
+
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ami.idAmis) }}">
+                                    <button>
+
+                                        <a href="{{ path('amis_edit', {'idAmis': ami.idAmis}) }}">
+
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </a>
+                                    </button>
+
+                                    <button>
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+
+
+                                </form>
+
+
+                            </div>
+
+
+                            <hr>
+                        </div>
+                    {% endfor %}
 
 
                 </div>
@@ -26,7 +81,7 @@
 
                 <!--Deuxième Section ( celle de la recherche de contact)-->
 
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <h1 class="text-center">La recherche de contacts:
                     </h1>
                     <br>
@@ -44,36 +99,14 @@
 
 
                             <div class="list col-md-2 ml-auto">
-                                <i class="fa fa-user-plus" aria-hidden="true" data-toggle="modal" data-target="#myModal">{{ button_label|default('') }}</i>
+                                <a href="{{ path('add_contact', {'id': users.idUser}) }}">
+                                    <i class="fa fa-user-plus" aria-hidden="true">{{ button_label|default('') }}</i>
+
+                                </a>
 
 
                             </div>
-                            <!-- Modal -->
-                            <div id="myModal" class="modal fade" role="dialog">
-                                <div
-                                    class="modal-dialog">
-
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            {# <h4 class="modal-title">Modal Header</h4> #}
-                                        </div>
-                                        <div
-                                            class="modal-body">
-                                            {{ form(start)}}
-
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-success">Ajouté en amis</button>
-
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermé</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                            {# {% include 'contact/add_contact.html.twig' %} #}
 
 
                             <hr>
@@ -87,138 +120,17 @@
             </div>
         </div>
     {% endif %}
+    {% include 'footer.html.twig' %}
+    {% block javascripts %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.js "></script>
 
-    <!-- Footer -->
-
-    <footer class="page-footer font-small unique-color-dark">
-        <hr>
-
-        <!-- Footer Links -->
-        <div
-            class="container text-center text-md-left mt-5">
-
-            <!-- Grid row -->
-            <div
-                class="row mt-3">
-
-                <!-- Grid column -->
-                <div
-                    class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-
-                    <!-- Content -->
-                    <h6 class="text-uppercase font-weight-bold">
-                        <i class="fa fa-comments-o fa-1x"></i>
-                        Messenger&CO
-                    </h6>
-
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                    <p>Est une application Web et mobile pour la discution privé et groupe.</p>
-
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div
-                    class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
-                    <!-- Links -->
-                    <h6 class="text-uppercase font-weight-bold">Products</h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                    <p>
-                        <a href="#!">MDBootstrap</a>
-                    </p>
-                    <p>
-                        <a href="#!">MDWordPress</a>
-                    </p>
-                    <p>
-                        <a href="#!">BrandFlow</a>
-                    </p>
-                    <p>
-                        <a href="#!">Bootstrap Angular</a>
-                    </p>
-                </p>
-            </div>
-
-            <!-- Grid column -->
-
-
-            <!-- Grid column -->
-            <div
-                class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
-                <!-- Links -->
-                <h6 class="text-uppercase font-weight-bold">Useful links</h6>
-                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>
-                    <a href="#!">Your Account</a>
-                </p>
-                <p>
-                    <a href="#!">Become an Affiliate</a>
-                </p>
-                <p>
-                    <a href="#!">Shipping Rates</a>
-                </p>
-                <p>
-                    <a href="#!">Help</a>
-                </p>
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div
-                class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
-                <!-- Links -->
-                <h6 class="text-uppercase font-weight-bold">Contact</h6>
-                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>
-                    <i class="fa fa-home mr-3"></i>
-                    Charleville-Mézière, 08000, France</p>
-                <p>
-                    <i class="fa fa-envelope mr-3"></i>
-                    v.cordier08200@gmail.com</p>
-                <p>
-                    <i class="fa fa-phone mr-3"></i>
-                    + 06-10-45-61-01</p>
-            </div>
-            <!-- Grid column -->
-
-        </div>
-        <!-- Grid row -->
-
-
-    </div>
-    <!-- Footer Links -->
-
-    <!-- Copyright -->
-    <div style="background-color: #05427D;">
-        <div class="footer-mentions-legale text-center py-3">
-
-            <a href="#" style="color: white;">Mentions légale</a>
-        </div>
-
-        <div class="footer-copyright text-center py-3" style="color: white;">
-
-
-            © 2019 Copyright:
-            <a href="{{ path('accueil') }}" style="color: white;hover: color: darkgrey;">
-
-
-                Messenger&CO</a>
-        </div>
-    </div>
-    <!-- Copyright -->
-</footer>
-{% block javascripts %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.js "></script>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function () {
-            $('body').bootstrapMaterialDesign();
-        });
-    </script>
-
-{% endblock %}{% endblock %}
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function () {
+                $('body').bootstrapMaterialDesign();
+            });
+        </script>
+    {% endblock %}
+{% endblock %}

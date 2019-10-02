@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -49,6 +51,49 @@ class Groupe
     public function __construct()
     {
         $this->idUser = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function getIdGroupe(): ?int
+    {
+        return $this->idGroupe;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getIdUser(): Collection
+    {
+        return $this->idUser;
+    }
+
+    public function addIdUser(User $idUser): self
+    {
+        if (!$this->idUser->contains($idUser)) {
+            $this->idUser[] = $idUser;
+        }
+
+        return $this;
+    }
+
+    public function removeIdUser(User $idUser): self
+    {
+        if ($this->idUser->contains($idUser)) {
+            $this->idUser->removeElement($idUser);
+        }
+
+        return $this;
     }
 
 }

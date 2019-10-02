@@ -93,9 +93,9 @@ class User implements UserInterface
     {
         $this->idGroupe = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idRole = new \Doctrine\Common\Collections\ArrayCollection();
-        }
+    }
 
-    public function getIdUser(): ?int
+ public function getIdUser(): ?int
     {
         return $this->idUser;
     }

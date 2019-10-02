@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\MessagePri;
-use App\Form\MessagePriType;
+use App\Form\MessPriType;
 use App\Repository\MessagePriRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,7 +47,7 @@ class ConversationController extends AbstractController
         $message = new MessagePri();
         
 
-        $form = $this->createForm(MessagePriType::class, $message);
+        $form = $this->createForm(MessPriType::class, $message);
 
         $form->handleRequest($request);
 

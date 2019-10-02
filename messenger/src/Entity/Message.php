@@ -48,5 +48,46 @@ class Message
      */
     private $idUser;
 
+    public function getIdMessage(): ?int
+    {
+        return $this->idMessage;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(string $message): self
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    public function getIdGroupe(): ?Groupe
+    {
+        return $this->idGroupe;
+    }
+
+    public function setIdGroupe(?Groupe $idGroupe): self
+    {
+        $this->idGroupe = $idGroupe;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
 
 }

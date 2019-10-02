@@ -1,0 +1,53 @@
+{% block title %}
+    Ajout d'amis
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/styles/contact.css">
+{% endblock %}
+
+
+{% block body %}
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div
+            class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    {# <h4 class="modal-title">Modal Header</h4> #}
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form) }}
+                    {{ form_row(form.message, {'label': 'Message :','attr': {'placeholder': 'Votre message ...', 'class': 'form-control'} }) }}
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Ajouté en amis</button>
+                    {{ form_end(form) }}
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermé</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {% block javascripts %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.js "></script>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function () {
+                $('body').bootstrapMaterialDesign();
+            });
+        </script>
+
+    {% endblock %}
+{% endblock %}
