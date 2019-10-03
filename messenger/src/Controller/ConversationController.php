@@ -7,6 +7,7 @@ use App\Entity\MessagePri;
 use App\Form\MessPriType;
 use App\Repository\MessagePriRepository;
 use App\Repository\UserRepository;
+use App\Repository\AmisRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,12 +19,17 @@ class ConversationController extends AbstractController
     /**
      * @Route("/conversation", name="conversation")
      */
-    public function index(UserRepository $repo)
+    public function index(UserRepository $repo2, AmisRepository $repo)
     {
-        $username = $repo->findAll();
-         
+        $user = $this->getUser();
+       
+
+        $amis = $repo->findByIdUser(array('id', $user));
+        
+         $users = $repo2->findByIdUser(array('id', $amis));  
         return $this->render('conversation/conversation.html.twig', [
-            'users' => $username
+            'amis' => $amis,
+            'users' => $users,
         ]);  
     }
 
@@ -34,7 +40,7 @@ class ConversationController extends AbstractController
      * 
      * @return Response
      */
-    public function show(Request $request, UserRepository $repo, MessagePriRepository $repo2, $id): Response
+    public function show(Request $request, UserRepository $repo, MessagePriRepository $repo2, AmisRepository $repo3, $id): Response
     {
 
         $username = $this->getUser();
@@ -78,6 +84,7 @@ class ConversationController extends AbstractController
                 
         $messages = $repo2->findByIdUser($id);
         $messages2 = $repo2->findByIdUserRecevoir($id);
+        $amis = $repo3->findByIdUser($id);
 
         } else{
             return $this->redirectToRoute('conversation');
@@ -88,7 +95,8 @@ class ConversationController extends AbstractController
         return $this->render('conversation/conversation_show.html.twig', [
             'controller_name' => 'Administrateur',
             'form' => $form->createView(),
-            'users' => $user,      
+            'users' => $user,
+            'amis' => $amis,      
             'messages' =>  $messages,
             'messages2' =>  $messages2,   
         ]);

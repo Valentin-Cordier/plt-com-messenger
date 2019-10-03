@@ -24,16 +24,16 @@ class Amis
     /**
      * @var string|null
      *
-     * @ORM\Column(name="username", type="string", length=50, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="username", type="text", length=50, nullable=true)
      */
-    private $username = 'NULL';
+    private $username;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="message", type="string", length=250, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="message", type="text", length=250, nullable=true)
      */
-    private $message = 'NULL';
+    private $message;
 
     /**
      * @var \User
@@ -73,6 +73,23 @@ class Amis
     public function setMessage(string $message): self
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getIdUsername(): ?int
+    {
+        return $this->idusername;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }

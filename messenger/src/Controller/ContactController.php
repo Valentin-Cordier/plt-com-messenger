@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Amis;
 use App\Entity\User;
-use App\Form\AmisType;
+use App\Form\Amis1Type;
+use App\Form\Amis2Type;
 use App\Repository\AmisRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,7 +65,7 @@ class ContactController extends AbstractController
 
         
 
-        $form = $this->createForm(AmisType::class, $amis);
+        $form = $this->createForm(Amis1Type::class, $amis);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -95,7 +96,7 @@ class ContactController extends AbstractController
      */
     public function edit(Request $request, Amis $ami): Response
     {
-        $form = $this->createForm(AmisType::class, $ami);
+        $form = $this->createForm(Amis2Type::class, $ami);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -104,7 +105,7 @@ class ContactController extends AbstractController
             return $this->redirectToRoute('contact');
         }
 
-        return $this->render('contact/amis_edit.html.twig', [
+        return $this->render('contact/edit_amis.html.twig', [
             'ami' => $ami,
             'form' => $form->createView(),
         ]);
@@ -126,6 +127,18 @@ class ContactController extends AbstractController
         return $this->redirectToRoute('contact');
     }
 
+    /**
+     * @Route("/contact/delete/{username}", name="username_delete")
+     */
+    public function username_delete(Request $request, Amis $ami): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$ami->getUsername(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($ami);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('contact');
+    }
 
 
 }

@@ -6,16 +6,26 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="/styles/contact.css">
 {% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.js "></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('body').bootstrapMaterialDesign();
+        });
+    </script>
+{% endblock %}
 
 
 {% block body %}
 
     {% if  app.user %}
-
-        <!--Première Section (celle des amis de l'utilisateur)-->
+        <!--Première Section suivie de la deuxième(celle des amis de l'utilisateur)-->
         <div class="container-fluid">
             <div class="row">
-
                 <div class="list col-md-5 mr-auto">
                     <h1 class="text-center">Les amis de "{{ user.username|title }}":</h1>
                     <br>
@@ -24,33 +34,32 @@
                         <button class="btn btn-secondary col-2 col-sm-2 mx-auto" type="submit">Search</button>
                     </form>
 
+                    <br>
+
+
                     {% for ami in amis %}
-                        <br>
-                        <div class="list col-md-12 mx-auto">
-
-                            <h4>{{ ami.idUserAmis|title }}</h4>
 
 
-                            <div class="list col-md-2 ml-auto">
+                        {% if ami.username is empty %}
+
+                            <div class="list col-md-12 mx-auto">
+
+                                <h4>{{ ami.idUserAmis|title }}</h4>
+
+                                <div class="list col-md-2 ml-auto">
 
 
-                                <a href="{{ path('profil') }}">
+                                    <a href="{{ path('profil') }}">
 
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                </a>
-
-
-                                <a href="{{ path('conversation') }}">
-                                    <i class="fa fa-comments " aria-hidden="true"></i>
-
-                                </a>
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                    </a>
 
 
-                                <form method="post" action="{{ path('amis_delete', {'idAmis': ami.idAmis}) }}" onsubmit=" return confirm('tu est sur de vouloir retirer cette amis de la liste ?');">
+                                    <a href="{{ path('conversation') }}">
+                                        <i class="fa fa-comments " aria-hidden="true"></i>
 
-                                    <input type="hidden" name="_method" value="DELETE">
+                                    </a>
 
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ami.idAmis) }}">
                                     <button>
 
                                         <a href="{{ path('amis_edit', {'idAmis': ami.idAmis}) }}">
@@ -59,78 +68,73 @@
                                         </a>
                                     </button>
 
+                                    <form method="post" action="{{ path('amis_delete', {'idAmis': ami.idAmis}) }}" onsubmit=" return confirm('tu est sur de vouloir retirer cette amis de la liste ?');">
+                                        <input type="hidden" name="_method" value="DELETE"/>
+
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ami.idAmis) }}"/>
+
+
+                                        <button>
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <hr>
+                            </div>
+
+
+                        {% else %}
+                            <div class="list col-md-12 mx-auto">
+
+
+                                <h4>
+                                    {{ ami.username|title }}
+                                </h4>
+
+                                <div class="list col-md-2 ml-auto">
+                                    <a href="{{ path('profil') }}">
+
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                    </a>
+
+
+                                    <a href="{{ path('conversation') }}">
+                                        <i class="fa fa-comments " aria-hidden="true"></i>
+
+                                    </a>
+
                                     <button>
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
+
+                                        <a href="{{ path('amis_edit', {'idAmis': ami.idAmis}) }}">
+
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </a>
                                     </button>
 
+                                    <form method="post" action="{{ path('amis_delete', {'idAmis': ami.idAmis}) }}" onsubmit=" return confirm('tu est sur de vouloir retirer cette amis de la liste ?');">
+                                        <input type="hidden" name="_method" value="DELETE"/>
 
-                                </form>
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ami.idAmis) }}"/>
 
 
+                                        <button>
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+
+                                </div>
+                                <hr>
                             </div>
 
 
-                            <hr>
-                        </div>
+                        {% endif %}
+
                     {% endfor %}
-
-
-                </div>
-                <hr
-                class="hr"/>
-
-                <!--Deuxième Section ( celle de la recherche de contact)-->
-
-                <div class="col-md-7">
-                    <h1 class="text-center">La recherche de contacts:
-                    </h1>
-                    <br>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control col-sm-10" type="text" placeholder="Search">
-                        <button class="btn btn-secondary col-2 col-sm-2 mx-auto" type="submit">Search</button>
-                    </form>
-                    <br>
-
-                    {% for users in username %}
-
-                        <div class="list col-md-12 mx-auto">
-
-                            {{ users.username}}
-
-
-                            <div class="list col-md-2 ml-auto">
-                                <a href="{{ path('add_contact', {'id': users.idUser}) }}">
-                                    <i class="fa fa-user-plus" aria-hidden="true">{{ button_label|default('') }}</i>
-
-                                </a>
-
-
-                            </div>
-                            {# {% include 'contact/add_contact.html.twig' %} #}
-
-
-                            <hr>
-                        </div>
-                    {% endfor %}
-
-
                 </div>
 
-
+                {% include "contact/section2contact.html.twig" %}
             </div>
         </div>
     {% endif %}
     {% include 'footer.html.twig' %}
-    {% block javascripts %}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.js "></script>
-
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
-        <script>
-            $(document).ready(function () {
-                $('body').bootstrapMaterialDesign();
-            });
-        </script>
-    {% endblock %}
 {% endblock %}

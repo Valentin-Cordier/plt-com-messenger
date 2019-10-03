@@ -6,19 +6,22 @@
 
 
 {% block body %}
-    <h2 style="text-align:center;">Votre liste de contact dont vous avez déjà discutez !</h2>
-    {% for users in users %}
+    <h2 style="text-align:center;">
+        Votre liste d'amis, vous pouvez leurs parler quand vous voulez !
+    </h2>
+    {% for amis in amis %}
+        {% for users in users %}
 
-        <div class="container">
-            <div class="row">
-                <div class="list-group col-md-4 mx-auto">
-                    {{ include ('conversation/users.html.twig') }}
+            <div class="container">
+                <div class="row">
+                    <div class="list-group col-md-4 mx-auto">
+                        {{ include ('conversation/users2.html.twig') }}
+                    </div>
+
                 </div>
 
             </div>
-
-        </div>
-
+        {% endfor %}
     {% endfor %}
 
 {% endblock %}
