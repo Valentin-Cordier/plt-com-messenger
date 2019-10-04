@@ -43,24 +43,28 @@ class MessagePriRepository extends ServiceEntityRepository
     // /**
     //  * @return MessagePri[] Returns an array of MessagePri objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findByUsers($receiver, $sender)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $query = $this->getEntityManager()->createQuery('
+                SELECT m FROM App\Entity\MessagePri m
+                WHERE
+                m.idUserRecevoir = :receiver AND m.idUser = :sender
+                OR m.idUserRecevoir = :sender AND m.idUser = :receiver
+            ')
+            ->setParameters([
+                'receiver' => $receiver,
+                'sender'   => $sender
+            ]);
         ;
+        return $query->getResult();
     }
-    */
+    // SELECT * FROM `message_pri` WHERE `id_user_recevoir`=5 AND `id_user` = 2 OR id_user_recevoir=2 AND id_user = 5
 
     /*
     public function findOneBySomeField($value): ?User
     {
-        return $this->createQueryBuilder('u')
+        return $this->createQueryBuilder('m')
             ->andWhere('u.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()

@@ -6,84 +6,66 @@
 
 {% block body %}
 
+    <br>
     <div class="container-fluid">
         <div class="row">
 
-            <div class="card-body col-md-4 ">
-                <div class="list col-md-12 mx-auto">
+
+            <div class="col-6 mx-auto">
+                <div class="card">
 
 
-                    <h5>Image
-                        <img src="" alt="">
-                        Username
-                        <div class="edit text-right">Editer Profil<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </div>
-
-                    </h5>
+                    <div class="card-body col-md-12 mx-auto">
 
 
-                    <hr>
-                    <h4>Nom</h4>
-                    <h4>Prénom</h4>
-                    <h4>
-                        <i class="fa fa-mobile fa-2x" aria-hidden="true"></i>
-                        Téléphone:</h4>
+                        <h5>Image
+                            <img src="" alt="">
+                            Username
+                            <div class="edit text-right">Editer Profil<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </div>
 
-                    <h4>
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                        Adresse Mail:</h4>
+                        </h5>
 
-                    <h4>
-                        <i class="fa fa-address-card" aria-hidden="true"></i>
-                        Adresse</h4>
+
+                        <hr>
+                        <h4>Nom</h4>
+                        <h4>Prénom</h4>
+                        <h4>
+                            <i class="fa fa-mobile fa-2x" aria-hidden="true"></i>
+                            Téléphone:</h4>
+
+                        <h4>
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            Adresse Mail:</h4>
+
+                        <h4>
+                            <i class="fa fa-address-card" aria-hidden="true"></i>
+                            Adresse</h4>
+
+
+                    </div>
 
 
                 </div>
-
             </div>
 
-            {# 
-                        <div class="list col-md-4 ml-auto">
-                            <h1 class="text-center">Les amis de :</h1>
-                             {% for ami in amis %} 
-            
-                            <div
-                                class="list col-md-12 ">
-            
-                                {{{ ami.idUserAmis|title }} 
-            
-            
-                                <div class="list col-md-4 ml-auto">
-            
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-            
-            
-                                    <a href="{{ path('conversation') }}">
-                                        <i class="fa fa-comments" aria-hidden="true"></i>
-            
-                                    </a>
-            
-            
-                                    <i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i>
-            
-            
-                                    <i class="fa fa-trash fa-1x" aria-hidden="true"></i>
-            
-            
-                                </div>
-            
-            
-                                <hr>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="galerie-photo col-md-6 mx-auto">
+                        <br>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Galerie photos:
+                                    {# {{users.username}} #}
+                                </h3>
                             </div>
-                             {% endfor %} 
-            
-            
-                        </div> #}
+
+                            <div class="card-body col-md-12 mx-auto"></div>
+
+                        </div>
+                    </div>
 
 
-        </div>
-
-    </div>
-
-    {% include('footer.html.twig') %}
-{% endblock %}
+                    {% include('footer.html.twig') %}
+                {% endblock %}

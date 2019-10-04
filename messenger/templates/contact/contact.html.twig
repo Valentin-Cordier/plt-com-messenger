@@ -31,7 +31,7 @@
                     <br>
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control col-sm-10" type="text" placeholder="Search">
-                        <button class="btn btn-secondary col-2 col-sm-2 mx-auto" type="submit">Search</button>
+                        <button2 class="btn btn-secondary col-2 col-sm-2 mx-auto" type="submit">Search</button2>
                     </form>
 
                     <br>
@@ -40,94 +40,56 @@
                     {% for ami in amis %}
 
 
-                        {% if ami.username is empty %}
+                        <div class="list col-md-12 mx-auto">
 
-                            <div class="list col-md-12 mx-auto">
-
-                                <h4>{{ ami.idUserAmis|title }}</h4>
-
-                                <div class="list col-md-2 ml-auto">
+                            <h4>{{ ami.idUserAmis|title }}</h4>
 
 
-                                    <a href="{{ path('profil') }}">
+                            <div class="list col-md-2 ml-auto">
+                                <div class="test">
 
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                    </a>
-
-
-                                    <a href="{{ path('conversation') }}">
-                                        <i class="fa fa-comments " aria-hidden="true"></i>
-
-                                    </a>
-
-                                    <button>
-
-                                        <a href="{{ path('amis_edit', {'idAmis': ami.idAmis}) }}">
-
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        </a>
-                                    </button>
 
                                     <form method="post" action="{{ path('amis_delete', {'idAmis': ami.idAmis}) }}" onsubmit=" return confirm('tu est sur de vouloir retirer cette amis de la liste ?');">
                                         <input type="hidden" name="_method" value="DELETE"/>
 
                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ami.idAmis) }}"/>
+                                        <a href="{{ path('profil') }}" style="color:black !important;">
 
 
-                                        <button>
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                                <hr>
-                            </div>
+                                            <i class="fa fa-user" id="i" aria-hidden="true"></i>
 
-
-                        {% else %}
-                            <div class="list col-md-12 mx-auto">
-
-
-                                <h4>
-                                    {{ ami.username|title }}
-                                </h4>
-
-                                <div class="list col-md-2 ml-auto">
-                                    <a href="{{ path('profil') }}">
-
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                    </a>
-
-
-                                    <a href="{{ path('conversation') }}">
-                                        <i class="fa fa-comments " aria-hidden="true"></i>
-
-                                    </a>
-
-                                    <button>
-
-                                        <a href="{{ path('amis_edit', {'idAmis': ami.idAmis}) }}">
-
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a>
-                                    </button>
 
-                                    <form method="post" action="{{ path('amis_delete', {'idAmis': ami.idAmis}) }}" onsubmit=" return confirm('tu est sur de vouloir retirer cette amis de la liste ?');">
-                                        <input type="hidden" name="_method" value="DELETE"/>
 
-                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ami.idAmis) }}"/>
+                                        <a href="{{ path('conversation') }}" style="color:black !important;">
+
+                                            <i class="fa fa-comments" id="i" aria-hidden="true"></i>
+
+                                        </a>
+
+
+                                        <a href="{{ path('amis_edit', {'idAmis': ami.idAmis}) }}" style="color:black !important;">
+
+
+                                            <i class="fa fa-pencil-square-o" id="i" aria-hidden="true"></i>
+
+
+                                        </a>
 
 
                                         <button>
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
+
+                                            <i class="fa fa-trash" id="i" aria-hidden="true"></i>
+
                                         </button>
                                     </form>
-
                                 </div>
-                                <hr>
+                                {# <hr> #}
                             </div>
 
 
-                        {% endif %}
+                        </div>
+
 
                     {% endfor %}
                 </div>

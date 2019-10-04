@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conversation avec
+    {{users.username}}
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/styles/conversation_show.css">
+{% endblock %}
+
+
+{% block body %}
+    {% if messages is not empty %}
+
+        <div class="container-fluid">
+            <div class="row">
+
+
+                <div class="col-10 mx-auto">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>
+                                {{users.username}}
+                            </h2>
+                        </div>
+                        <div class="scrollbar scrollbar-primary">
+                            <div class="force-overflow">
+
+
+                                {% for message in messages %}
+                                    {% if app.user == message.idUser %}
+
+                                        <div class="card-body w-50 conversation ml-auto ">
+                                            <div class="conv">
+                                                <p class="my-2">
+                                                    {{ message.message }}<br>Envoyé par
+                                                    {{ message.idUser.username }}
+                                                    {# à dateTime #}
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                    {% else %}
+                                        <div class="card-body w-50 conversation">
+                                            <div class="conv">
+                                                <p class=" my-2">
+                                                    {{ message.message }}<br>
+                                                    Envoyé par
+                                                    {{ message.idUser.username }}
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        {{ form_start(form) }}
+
+                        <div class="form-group2 col-md-12 mx-auto">
+                            {{ form_row(form.message, {'label': 'Message :','attr': {'placeholder': 'Votre message ...', 'class': 'form-control'} }) }}
+
+                        </div>
+                        <br>
+                        <div class="form-group2 col-md-2 mx-auto">
+                            <button class="btn btn-primary" type="submit">Envoyé</button>
+
+                        </div>
+
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+
+    {% if messages is empty %}
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-10 mx-auto">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>
+                                {{users.username}}
+                            </h2>
+                        </div>
+                        <div class="card-body conversation">
+                            <form action="{{ path('conversation_show', {'id': users.idUser}) }}" method="post">
+                                <div class="form-group">
+
+                                    <div class="card-body conversation">
+                                        <div class="conv">
+                                            <h5>
+                                                Envoyer le premier message de la conversation.
+                                            </h5>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                {{ form_start(form) }}
+                                <div class="form-group2 col-md-12 mx-auto">
+                                    {{ form_row(form.message, {'label': 'Message :','attr': {'placeholder': 'Votre message ...', 'class': 'form-control'} }) }}
+
+                                </div>
+                                <br>
+                                <div class="form-group2 col-md-2 mx-auto">
+                                    <button class="btn btn-primary" type="submit">Envoyé</button>
+
+                                </div>
+
+
+                                {{ form_end(form) }}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% endif %}
+
+    {% include "footer.html.twig" %}
+
+{% endblock %}

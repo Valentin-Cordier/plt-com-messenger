@@ -17,8 +17,10 @@
             {{ users.username}}
 
             <div class="list col-md-2 ml-auto">
-                <a href="{{ path('add_contact', {'id': users.idUser}) }}">
-                    <i class="fa fa-user-plus" aria-hidden="true">{{ button_label|default('') }}</i>
+                <a href="{{ path('add_contact', {'id': users.idUser}) }}" style="color:black !important;">
+
+                    <i class="fa fa-user-plus" id="i" aria-hidden="true">{{ button_label|default('') }}</i>
+
 
                 </a>
 

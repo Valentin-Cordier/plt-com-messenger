@@ -4,24 +4,36 @@
 {% block title %}Index des Conversation
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="/styles/conversation.css">
+{% endblock %}
+
 
 {% block body %}
     <h2 style="text-align:center;">
         Votre liste d'amis, vous pouvez leurs parler quand vous voulez !
     </h2>
-    {% for amis in amis %}
-        {% for users in users %}
+    {% for ami in amis %}
 
-            <div class="container">
-                <div class="row">
-                    <div class="list-group col-md-4 mx-auto">
-                        {{ include ('conversation/users2.html.twig') }}
+        <div class="container">
+            <div class="row">
+                <div class="list-group col-md-4 mx-auto">
+                    <div class="list">
+                        {% if ami.idUserAmis is not empty %}
+                            <a href="{{ path('conversation_show', {'id': ami.idUserAmis.idUser}) }}" class="list-group-item" style="text-align: center;">
+
+                                {{ ami.idUserAmis.username|title }}
+
+                            </a>
+                        {% endif %}
+                        <br>
                     </div>
 
                 </div>
 
             </div>
-        {% endfor %}
-    {% endfor %}
 
+        </div>
+    {% endfor %}
+    {% include "footer.html.twig" %}
 {% endblock %}

@@ -8,10 +8,41 @@ font-size: 2em;
 cursor: pointer;
 } 
 
+
+
+#i:hover{
+    font-size: 20px;
+    transition: font-size 0.5s;
+}
+
+button {
+    background-color: white;
+    border-color: white;
+    padding: 0;
+    border: 0 !important;
+}
+
 /* .hr{ 
   
     border:         none;
     border-left:    1px solid hsla(200, 10%, 50%,100);
     height:         5;
     width:          1px;       
+} */
+
+/* .test{
+    background-color: #05427D;
+    text-decoration: none;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    color: white;
+    margin-top: 1em auto !important;
+     border-radius: 7px !important;    
+}
+
+.test:hover{
+    color: white;
+    background-color: rgb(141, 141, 141);
+    transition: 1s;
+
 } */

@@ -25,3 +25,32 @@ figure{
         top: 0.4em;
     }
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: white;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(53, 52, 52);
+    cursor: pointer;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+      cursor: pointer;
+    background: #05427D;
+    transition: background-color .5s, 
+      opacity .6s, visibility .7s;
+  }
+
+  li:hover{
+      font-size: 17px;
+    transition: font-size 0.8s;
+  }

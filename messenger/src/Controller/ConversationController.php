@@ -22,14 +22,16 @@ class ConversationController extends AbstractController
     public function index(UserRepository $repo2, AmisRepository $repo)
     {
         $user = $this->getUser();
-       
-
-        $amis = $repo->findByIdUser(array('id', $user));
         
-         $users = $repo2->findByIdUser(array('id', $amis));  
+        
+       $amis = $repo->findBy(["idUser" => $user],[]);
+
+        // $amis = $repo->findByIdUser(array('id' => $user));
+        
+        // $users = $repo2->findByIdUser(array('id' => $amis));  
         return $this->render('conversation/conversation.html.twig', [
             'amis' => $amis,
-            'users' => $users,
+            // 'users' => $users,
         ]);  
     }
 
@@ -82,8 +84,8 @@ class ConversationController extends AbstractController
 
         if($user != $username) {
                 
-        $messages = $repo2->findByIdUser($id);
-        $messages2 = $repo2->findByIdUserRecevoir($id);
+        $messages = $repo2->findByUsers($username,$user);
+        // $messages2 = $repo2->findByIdUserRecevoir($id);
         $amis = $repo3->findByIdUser($id);
 
         } else{
@@ -92,13 +94,13 @@ class ConversationController extends AbstractController
         
         
 
-        return $this->render('conversation/conversation_show.html.twig', [
+        return $this->render('conversation/conv_show.html.twig', [
             'controller_name' => 'Administrateur',
             'form' => $form->createView(),
             'users' => $user,
             'amis' => $amis,      
             'messages' =>  $messages,
-            'messages2' =>  $messages2,   
+            // 'messages2' =>  $messages2,   
         ]);
         
         

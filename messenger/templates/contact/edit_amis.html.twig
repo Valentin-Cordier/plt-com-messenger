@@ -8,28 +8,27 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <div class="form-group col-md-8 mx-auto">
+            <div class="form-group col-md-8 mx-auto text-center">
                 <h1>
                     {{ form_start(form) }}
                     {{ form_row(form.username, {'label': 'Username: ', 'attr': {'placeholder':"L'username que vous modifié selon votre votre ami", 'class': 'form-control'} }) }}
 
+                    <br>
+                    <button class="btn btn-primary" type="submit">{{ button_label|default('enregistrer') }}</button>
 
-                    <div class="form-group">
-                        <button class="btn btn-primary">{{ button_label|default('enregistrer') }}</button>
-                    </div>
+
+                    <button class="btn btn-primary" type="button">
+                        <a href="{{ path('contact') }}">{{ button_label|default('Retour aux Contacts') }}</a>
+
+
+                    </button>
+
 
                     {{ form_end(form) }}
                     {# 
-                                        {% include "contact/form_delete_username.html.twig" %} #}
+                                                                                                                                                                                                                                                                                        {% include "contact/form_delete_username.html.twig" %} #}
 
                 </h1>
-
-
-                <div class="form-group">
-                    <button class="btn btn-primary">
-                        <a href="{{ path('contact') }}">Retour aux Contacts</a>
-                    </button>
-                </div>
 
 
             </div>
@@ -37,5 +36,7 @@
 
         </div>
     </div>
+
+    {% include "footer.html.twig" %}
 
 {% endblock %}

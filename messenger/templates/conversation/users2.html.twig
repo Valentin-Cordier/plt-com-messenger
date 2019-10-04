@@ -10,13 +10,21 @@
         <div class="list">
             <a href="{{ path('conversation_show', {'id': users.idUser}) }}" class="list-group-item" style="text-align: center;">
 
+                {% if amis.username is empty %}
 
-                {{ amis.idUserAmis }}
+                    {{ amis.idUserAmis }}
+
+                {% else %}
+
+                    {{ amis.username|title }}
+
+                {% endif %}
+
 
             </a>
             <hr>
         </div>
         {# {% else %}
-                                                                                                                                                                                                                                                                                                             #}
+                                                                                                                                                                                                                                                                                                                                                             #}
     {% endif %}
 {% endblock %}
