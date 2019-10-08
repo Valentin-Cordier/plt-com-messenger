@@ -1,25 +1,28 @@
 <!--Deuxième Section ( celle de la recherche de contact)-->
 
-<div class="col-md-7">
+<div class="col-md-5 mx-auto">
     <h1 class="text-center">La recherche de contacts:
     </h1>
     <br>
     <form class="form-inline my-2 my-lg-0">
-        <input class="form-control col-sm-10" type="text" placeholder="Search">
-        <button class="btn btn-secondary col-2 col-sm-2 mx-auto" type="submit">Search</button>
+        <input class="form-control col-sm-9" type="text" placeholder="Search">
+        <button2 class="btn btn-secondary col-2 col-sm-3 mx-auto text-center" type="submit">Search</button2>
     </form>
-    <br>
+    {# <br> #}
 
     {% for users in username %}
+        <br>
+        <div class="list-group col-md-12 mx-auto text-center">
 
-        <div class="list col-md-12 mx-auto">
 
-            {{ users.username}}
+            <h4>{{ users.username}}</h4>
 
-            <div class="list col-md-2 ml-auto">
-                <a href="{{ path('add_contact', {'id': users.idUser}) }}" style="color:black !important;">
 
-                    <i class="fa fa-user-plus" id="i" aria-hidden="true">{{ button_label|default('') }}</i>
+            <div class="list col-md-2 mx-auto">
+                <a
+                    href="{{ path('add_contact', {'id': users.idUser}) }}" style="color:black !important;">
+                    {# <br> #}
+                    <i class="fa fa-user-plus text-center" id="i" aria-hidden="true">{{ button_label|default('') }}</i>
 
 
                 </a>
@@ -27,7 +30,7 @@
             </div>
             {# {% include 'contact/add_contact.html.twig' %} #}
 
-            <hr>
+
         </div>
     {% endfor %}
 

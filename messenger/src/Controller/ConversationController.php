@@ -86,7 +86,7 @@ class ConversationController extends AbstractController
                 
         $messages = $repo2->findByUsers($username,$user);
         // $messages2 = $repo2->findByIdUserRecevoir($id);
-        $amis = $repo3->findByIdUser($id);
+        $amis = $repo3->findBy(["idUser" => $user],[]);;
 
         } else{
             return $this->redirectToRoute('conversation');

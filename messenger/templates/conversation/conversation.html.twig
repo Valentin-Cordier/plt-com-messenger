@@ -10,30 +10,49 @@
 
 
 {% block body %}
-    <h2 style="text-align:center;">
-        Votre liste d'amis, vous pouvez leurs parler quand vous voulez !
-    </h2>
-    {% for ami in amis %}
 
-        <div class="container">
-            <div class="row">
-                <div class="list-group col-md-4 mx-auto">
-                    <div class="list">
-                        {% if ami.idUserAmis is not empty %}
-                            <a href="{{ path('conversation_show', {'id': ami.idUserAmis.idUser}) }}" class="list-group-item" style="text-align: center;">
 
-                                {{ ami.idUserAmis.username|title }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 mr-auto text-center">
+                <h1 class="text-center">
 
-                            </a>
-                        {% endif %}
-                        <br>
+                    Votre liste d'amis !
+                </h1>
+
+                <button class="btn btn-primary">
+                    <a href=" {{ path('contact') }} ">
+                        retour à la liste de contact
+                    </a>
+                </button>
+                <br/>
+                <br/>
+                {% for ami in amis %}
+
+
+                    <div class="col-md-12 mx-auto">
+                        <div class="list-group col-md-10 mx-auto">
+                            <div class="list">
+                                {% if ami.username is empty %}
+                                    <a href="{{ path('conversation_show', {'id': ami.idUserAmis.idUser}) }}" class="list-group-item" style="text-align: center;">
+                                        {{ ami.idUserAmis.username|title }}
+                                    </a>
+                                {% else %}
+                                    <a href="{{ path('conversation_show', {'id': ami.idUserAmis.idUser}) }}" class="list-group-item" style="text-align: center;">
+                                        {{ ami.username|title }}
+                                    </a>
+
+                                {% endif %}
+                            </div>
+                            <br>
+                        </div>
                     </div>
 
-                </div>
 
+                {% endfor %}
             </div>
-
+            {% include "conversation/list_conv_gr.html.twig" %}
         </div>
-    {% endfor %}
+    </div>
     {% include "footer.html.twig" %}
 {% endblock %}

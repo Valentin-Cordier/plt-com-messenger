@@ -15,14 +15,33 @@
 
         <div class="container-fluid">
             <div class="row">
+                <div class="col-md-2 mx-auto text-center">
+                    <br>
+                    <a href="{{ path('conversation') }}">
+                        <button class="btn btn-primary">
+                            Retour aux conversations
 
 
-                <div class="col-10 mx-auto">
+                        </button>
+                    </a>
+                    <hr>
+
+
+                </div>
+
+
+                <div class="col-8 mx-auto">
+                    <br>
+
                     <div class="card">
                         <div class="card-header">
+
+
                             <h2>
                                 {{users.username}}
                             </h2>
+
+
                         </div>
                         <div class="scrollbar scrollbar-primary">
                             <div class="force-overflow">
@@ -82,13 +101,31 @@
     {% if messages is empty %}
         <div class="container-fluid">
             <div class="row">
+                <div class="col-md-2 mx-auto text-center">
+                    <a href="{{ path('conversation') }}">
+                        <button class="btn btn-primary">
+                            Retour aux conversations
+                            <br>
 
-                <div class="col-10 mx-auto">
+                        </button>
+                    </a>
+
+
+                </div>
+
+
+                <div class="col-8 mx-auto">
+
+
                     <div class="card">
                         <div class="card-header">
+
+
                             <h2>
                                 {{users.username}}
                             </h2>
+
+
                         </div>
                         <div class="card-body conversation">
                             <form action="{{ path('conversation_show', {'id': users.idUser}) }}" method="post">

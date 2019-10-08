@@ -51,196 +51,196 @@
 
                         <!--Fonction avec le temps le cooté musique-->
                     {# <li class="nav-item">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <a class="nav-link" href="{{ path('musique') }}">Conversation</a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </li> #}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <a class="nav-link" href="{{ path('musique') }}">Conversation</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </li> #}
                         <!--Fin de l'ajout-->
                     </ul>
 
 
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('profile')}}">
+
+                            <a class="nav-link" href="{{ path('profil') }}">
+
 
                                 <i class="fa fa-user fa-2x" aria-hidden="true"></i>
                             </a>
-                        </li>
-
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('deconnexion') }}">
-                                <i class="fa fa-power-off fa-2x"></i>
-
-                            </a>
 
                         </li>
-                    </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('deconnexion') }}">
+                            <i class="fa fa-power-off fa-2x"></i>
+
+                        </a>
+
+                    </li>
+                </ul>
 
 
-                </div>
-            </nav>
+            </div>
+        </nav>
 
-            <figure class="navbar-nav mr-auto">
+        <figure class="navbar-nav mr-auto">
 
 
-                <a class="navbar-brand" style="color: white;" href="{{ path('accueil') }}">
+            <a class="navbar-brand" style="color: white;" href="{{ path('accueil') }}">
+                <i class="fa fa-comments-o fa-2x"></i>
+
+
+                Messenger&CO</a>
+        </figure>
+
+
+        <!--Slider après nav en étant connecté-->
+    {% else %}
+        {% if not app.user %}
+
+            <div class="collapse navbar-collapse" id="navbarColor02">
+
+                <a class="navbar-brand" href="{{ path('index') }}">
                     <i class="fa fa-comments-o fa-2x"></i>
 
 
                     Messenger&CO</a>
-            </figure>
+
+            </ul>
+            <ul class="navbar-nav ml">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('index') }}">index</a>
+                </li>
 
 
-            <!--Slider après nav en étant connecté-->
-        {% else %}
-            {% if not app.user %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('connexion') }}">Connexion</a>
+                </li>
 
-                <div class="collapse navbar-collapse" id="navbarColor02">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('inscription') }}">Créer un compte</a>
+                </li>
 
-                    <a class="navbar-brand" href="{{ path('index') }}">
-                        <i class="fa fa-comments-o fa-2x"></i>
-
-
-                        Messenger&CO</a>
-
-                </ul>
-                <ul class="navbar-nav ml">
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('index') }}">index</a>
-                    </li>
+            </ul>
+        </div>
 
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('connexion') }}">Connexion</a>
-                    </li>
+    </nav>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('inscription') }}">Créer un compte</a>
-                    </li>
+    <!--Parallax 1-->
+    <div class="parallax-element" id="Acceuil" data-parallax="scroll" data-image-src="images/mi1.png" alt="" id="">
 
-                </ul>
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="card-body">
+                    <div class="description">
+                        <i class="fa fa-comments-o fa-5x"></i>
+                        <h1>Messenger&Co :</h1>
+                        <br>
+
+                        <h3>
+                            Est une application Web et mobile de messagerie instantanée. Elle permet de communiquer plus facilement une fois connecté.
+                        </h3>
+
+                    </div>
+
+
+                </div>
+
             </div>
+        </div>
 
 
-        </nav>
+    </div>
 
-        <!--Parallax 1-->
-        <div class="parallax-element" id="Acceuil" data-parallax="scroll" data-image-src="images/mi1.png" alt="" id="">
 
-            <div class="container-fluid">
-                <div class="row">
+    <!--Parallax 2 -->
+    <div class="parallax-element" id="Accueil" data-parallax="scroll" data-image-src="images/mi2.png" alt="" id="">
+
+        <div class="container-fluid-width=100%">
+            <div
+                class="row">
+                {# <div class="button col-12"> #}
+                <div class="col-sm-6">
+
 
                     <div class="card-body">
-                        <div class="description">
-                            <i class="fa fa-comments-o fa-5x"></i>
-                            <h1>Messenger&Co :</h1>
-                            <br>
-
-                            <h3>
-                                Est une application Web et mobile de messagerie instantanée. Elle permet de communiquer plus facilement une fois connecté.
-                            </h3>
+                        <div class="log">
+                            <h2>
+                                Si vous avez déjà un compte connecter vous !
+                            </h2>
+                            <i class="fa fa-arrow-circle-down fa-5x"></i>
 
                         </div>
 
 
                     </div>
 
+                    <a href="{{ path('connexion') }}">
+                        <button type="button" class="btn btn-primary btn-lg btn-block">Se connecter</button>
+                    </a>
                 </div>
-            </div>
 
 
-        </div>
+                <div class="col-sm-6">
 
-
-        <!--Parallax 2 -->
-        <div class="parallax-element" id="Accueil" data-parallax="scroll" data-image-src="images/mi2.png" alt="" id="">
-
-            <div class="container-fluid-width=100%">
-                <div
-                    class="row">
-                    {# <div class="button col-12"> #}
-                    <div class="col-sm-6">
-
-
-                        <div class="card-body">
-                            <div class="log">
-                                <h2>
-                                    Si vous avez déjà un compte connecter vous !
-                                </h2>
-                                <i class="fa fa-arrow-circle-down fa-5x"></i>
-
-                            </div>
+                    <div class="card-body">
+                        <div class="log">
+                            <h2>
+                                Si vous n'avez pas de compte inscrivez-vous !
+                            </h2>
+                            <i class="fa fa-arrow-circle-down fa-5x"></i>
 
 
                         </div>
-
-                        <a href="{{ path('connexion') }}">
-                            <button type="button" class="btn btn-primary btn-lg btn-block">Se connecter</button>
-                        </a>
                     </div>
 
-
-                    <div class="col-sm-6">
-
-                        <div class="card-body">
-                            <div class="log">
-                                <h2>
-                                    Si vous n'avez pas de compte inscrivez-vous !
-                                </h2>
-                                <i class="fa fa-arrow-circle-down fa-5x"></i>
-
-
-                            </div>
-                        </div>
-
-                        <a href="{{ path('inscription') }}">
-                            <button type="button" class="btn btn-primary btn-lg btn-block">Inscription</button>
-                        </a>
-                    </div>
+                    <a href="{{ path('inscription') }}">
+                        <button type="button" class="btn btn-primary btn-lg btn-block">Inscription</button>
+                    </a>
                 </div>
             </div>
-
-
         </div>
 
-        <!--Parallax 3 -->
 
-        <div class="parallax-element" id="Accueil" data-parallax="scroll" data-image-src="images/mi3.png" alt="" id="">
+    </div>
 
+    <!--Parallax 3 -->
 
-            <div class="container-fluid">
-                <div class="row">
-
-                    <div class="card-body">
-                        <div class="log"></div>
+    <div class="parallax-element" id="Accueil" data-parallax="scroll" data-image-src="images/mi3.png" alt="" id="">
 
 
-                    </div>
+        <div class="container-fluid">
+            <div class="row">
 
-                    <div class="card-body">
-                        <div class="log"></div>
-
-
-                    </div>
-
-                    <div class="card-body">
-                        <div class="log"></div>
-
-
-                    </div>
+                <div class="card-body">
+                    <div class="log"></div>
 
 
                 </div>
+
+                <div class="card-body">
+                    <div class="log"></div>
+
+
+                </div>
+
+                <div class="card-body">
+                    <div class="log"></div>
+
+
+                </div>
+
+
             </div>
-
-
         </div>
 
-        <!--Fin des Parallax-->
+
+    </div>
+
+    <!--Fin des Parallax-->
 
 
-        {% include 'footer.html.twig' %}
+    {% include 'footer.html.twig' %}
 
-    {% endif %}
-{% endif %}
-{% block body %}{% endblock %}</body></html>
+{% endif %}{% endif %}{% block body %}{% endblock %}</body></html>

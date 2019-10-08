@@ -25,13 +25,7 @@ class ContactController extends AbstractController
     public function contact(Request $request, UserRepository $repo2, AmisRepository $repo)
     {
         $users = $this->getUser();
-        
-
-        
-
-
-                   
-
+   
         $username = $repo2->findAll();
         $user = $repo2->find($users);
 

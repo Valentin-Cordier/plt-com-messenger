@@ -5,18 +5,8 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="/styles/contact.css">
-{% endblock %}
-{% block javascripts %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.js "></script>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function () {
-            $('body').bootstrapMaterialDesign();
-        });
-    </script>
+
 {% endblock %}
 
 
@@ -26,12 +16,12 @@
         <!--Première Section suivie de la deuxième(celle des amis de l'utilisateur)-->
         <div class="container-fluid">
             <div class="row">
-                <div class="list col-md-5 mr-auto">
+                <div class="list col-md-5 mx-auto">
                     <h1 class="text-center">Les amis de "{{ user.username|title }}":</h1>
                     <br>
                     <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control col-sm-10" type="text" placeholder="Search">
-                        <button2 class="btn btn-secondary col-2 col-sm-2 mx-auto" type="submit">Search</button2>
+                        <input class="form-control col-sm-9" type="text" placeholder="Search">
+                        <button2 class="btn btn-secondary col-2 col-sm-3 mx-auto text-center" type="submit">Search</button2>
                     </form>
 
                     <br>
@@ -39,21 +29,23 @@
 
                     {% for ami in amis %}
 
-
-                        <div class="list col-md-12 mx-auto">
-
-                            <h4>{{ ami.idUserAmis|title }}</h4>
+                        {% if ami.username is empty %}
 
 
-                            <div class="list col-md-2 ml-auto">
-                                <div class="test">
+                            <div class="list-group col-md-12 mx-auto">
+
+
+                                <h4 class="text-center">{{ ami.idUserAmis|title }}</h4>
+
+
+                                <div class="text-center">
 
 
                                     <form method="post" action="{{ path('amis_delete', {'idAmis': ami.idAmis}) }}" onsubmit=" return confirm('tu est sur de vouloir retirer cette amis de la liste ?');">
                                         <input type="hidden" name="_method" value="DELETE"/>
 
                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ami.idAmis) }}"/>
-                                        <a href="{{ path('profil') }}" style="color:black !important;">
+                                        <a href="{{ path('profil', {'idAmis' : ami.idAmis}) }}" style="color:black !important;">
 
 
                                             <i class="fa fa-user" id="i" aria-hidden="true"></i>
@@ -85,10 +77,64 @@
                                     </form>
                                 </div>
                                 {# <hr> #}
+
+
                             </div>
 
+                            <br>
+                        {% else %}
+                            <div class="list-group col-md-12 mx-auto text-center">
 
-                        </div>
+
+                                <h4>{{ ami.username|title }}</h4>
+
+
+                                <div class="text-center">
+
+
+                                    <form method="post" action="{{ path('amis_delete', {'idAmis': ami.idAmis}) }}" onsubmit=" return confirm('tu est sur de vouloir retirer cette amis de la liste ?');">
+                                        <input type="hidden" name="_method" value="DELETE"/>
+
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ami.idAmis) }}"/>
+                                        <a href="{{ path('profil', {'idAmis' : ami.idAmis}) }}" style="color:black !important;">
+
+
+                                            <i class="fa fa-user" id="i" aria-hidden="true"></i>
+
+                                        </a>
+
+
+                                        <a href="{{ path('conversation') }}" style="color:black !important;">
+
+                                            <i class="fa fa-comments" id="i" aria-hidden="true"></i>
+
+                                        </a>
+
+
+                                        <a href="{{ path('amis_edit', {'idAmis': ami.idAmis}) }}" style="color:black !important;">
+
+
+                                            <i class="fa fa-pencil-square-o" id="i" aria-hidden="true"></i>
+
+
+                                        </a>
+
+
+                                        <button>
+
+                                            <i class="fa fa-trash" id="i" aria-hidden="true"></i>
+
+                                        </button>
+                                    </form>
+                                </div>
+                                {# <hr> #}
+
+
+                            </div>
+                            <br>
+
+
+                        {% endif %}
 
 
                     {% endfor %}
