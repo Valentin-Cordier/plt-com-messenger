@@ -20,10 +20,10 @@ class PltComMessengerController extends AbstractController
         
         
 
-        $amis = $repo->findBy(["idUser" => $user],[]);
+        
         return $this->render('base.html.twig', [
             'controller_name' => 'PltComMessengerController',
-            'users' => $amis
+            
         ]);
     }
 
@@ -32,14 +32,12 @@ class PltComMessengerController extends AbstractController
      */
     public function index(MessagePriRepository $repo, UserRepository $repo2)
     {
-        $users = $this->getUser();
+        
 
-        $message = $repo->findByIdUserRecevoir(array(['id' => 'ASC', 5]));
-        $user = $repo2->findByIdUser($users);
 
         return $this->render('plt_com_messenger/index.html.twig', [
-            'message' => $message,
-            'user' => $user,
+            
+            
         ]);
         
         }
@@ -51,10 +49,10 @@ class PltComMessengerController extends AbstractController
     {
           $user = $this->getUser();
 
-          $users = $repo->find($user);
+          
           $amis = $repo2->findBy(["idUser" => $user],[]);
         return $this->render('plt_com_messenger/profil.html.twig', [
-             'users' => $users,
+             
              'amis' => $amis
         ]);
     }
